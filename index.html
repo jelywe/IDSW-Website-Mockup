@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>IDSW – Infectious Diseases Society of Washington</title>
+  <link rel="stylesheet" href="IDSW style.css">
+  <style>
+    /* .btn-green, .btn-secondary*/
+
+    /* Hero section */
+    .hero {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 40px 40px 32px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: 32px;
+      margin-bottom: 16px;
+      color: var(--brand-ink);
+    }
+
+    .hero p {
+      font-size: 18px;
+      line-height: 1.5;
+      margin-bottom: 24px;
+      max-width: 700px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    /* Invite panel */
+    
+    .invite-panel {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 26px 28px 24px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+      border-left: 10px solid var(--brand);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .invite-panel-text {
+      flex: 1;
+    }
+
+    .invite-panel h2 {
+      font-size: 22px;
+      margin-bottom: 8px;
+      color: var(--brand-ink);
+    }
+
+    .invite-panel p {
+      font-size: 15px;
+      line-height: 1.5;
+      margin-bottom: 10px;
+      max-width: 650px;
+    }
+
+    .invite-panel ul {
+      list-style: none;
+      margin-top: 4px;
+      margin-bottom: 0;
+      padding-left: 0;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .invite-panel ul li::before {
+      content: "•";
+      margin-right: 6px;
+      color: var(--brand);
+    }
+
+    .invite-panel-cta {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .invite-note {
+      font-size: 12px;
+      color: var(--muted);
+      max-width: 220px;
+    }
+
+
+    /* Latest strip */
+    .latest {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 24px 24px 30px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+    }
+
+    .latest h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: var(--brand-ink);
+    }
+
+    .latest p {
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+
+    /* Simple responsiveness */
+    @media (max-width: 900px) {
+      .features {
+        grid-template-columns: 1fr;
+      }
+      
+      .invite-panel {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .invite-panel-cta {
+        width: 100%;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Supporting Infectious Diseases Professionals in Washington</h1>
+    <p>
+      Connecting clinicians, elevating stories from the front lines, and advancing policy that
+      protects patients and communities across Washington State.
+    </p>
+    <div class="hero-buttons">
+      <button class="btn-green">Learn about IDSW</button>
+      <button class="btn-secondary">Become a Member</button>
+      <button class="btn-secondary">Log In</button>
+    </div>
+  </section>
+
+  <!-- Feature cards -->
+  <section class="features">
+    <article class="feature-card">
+      <h3>Member Directory</h3>
+      <p>
+        Find colleagues across Washington for shared patients and subject-matter expertise in
+        infectious diseases.
+      </p>
+      <span class="feature-tag">Members-only</span>
+    </article>
+
+    <article class="feature-card">
+      <h3>Story Collection</h3>
+      <p>
+        Share real-world experiences that highlight system gaps and opportunities to strengthen
+        ID care in our state.
+      </p>
+      <span class="feature-tag">Powered by members</span>
+    </article>
+
+    <article class="feature-card">
+      <h3>Policy &amp; Advocacy</h3>
+      <p>
+        See how IDSW engages on key issues, from antimicrobial stewardship to workforce and
+        access to care.
+      </p>
+      <span class="feature-tag">Coming soon</span>
+    </article>
+  </section>
+
+  <!-- Invite an ID professional -->
+  <section class="invite-panel">
+    <div class="invite-panel-text">
+      <h2>Request an ID Professional for Your Group</h2>
+      <p>
+        Looking for an infectious diseases expert to speak with your team, trainees, or community?
+        IDSW can help connect you with clinicians who regularly talk with:
+      </p>
+      <ul>
+        <li>Hospital and clinic teams</li>
+        <li>Residency and fellowship programs</li>
+        <li>Public health and community organizations</li>
+        <li>Schools, faith communities, and local coalitions</li>
+      </ul>
+    </div>
+    <div class="invite-panel-cta">
+      <button class="btn-green">Request a Speaker</button>
+      <p class="invite-note">
+        Share a few details about your audience, topic, and preferred dates, and we’ll follow up with next steps.
+      </p>
+    </div>
+  </section>
+
+  <!-- Latest from IDSW -->
+  <section class="latest">
+    <h2>Latest from IDSW</h2>
+    <p>
+      Upcoming event: <strong>[Placeholder – IDSW Meeting Title]</strong><br>
+      Advocacy update: <strong>[Brief description of an issue or action alert]</strong>
+    </p>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+  fetch("IDSW%20header.html")
+    .then(r => {
+      if (!r.ok) throw new Error("Failed to load header.html");
+      return r.text();
+    })
+    .then(html => {
+      document.getElementById("site-header").innerHTML = html;
+    })
+    .catch(err => console.error(err));
+    
+  fetch("IDSW%20footer.html")
+    .then(r => {
+      if (!r.ok) throw new Error("Failed to load footer.html");
+      return r.text();
+    })
+    .then(html => {
+      document.getElementById("site-footer").innerHTML = html;
+    })
+    .catch(err => console.error(err));
+
+</script>
+
+</body>
+</html>
