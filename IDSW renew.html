@@ -8,9 +8,20 @@
   <link rel="stylesheet" href="IDSW link section style.css">
 
   <style>
-    /* Page-specific additions only (reuse your existing .page-hero, .section-card, .btn-green, etc.) */
+    .renewal-card p {
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
 
+    .renewal-note {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 10px;
+    }
 
+    .renewal-actions a {
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
@@ -21,21 +32,35 @@
   <section class="page-hero">
     <h1>Membership Renewal</h1>
     <p>
-
+      Renew your IDSW membership using our secure online payment link.
     </p>
   </section>
 
-  
-  <!-- 
-  <section class="section-card">
+  <section class="section-card renewal-card">
+    <h2>Renew Online</h2>
+    <p>
+      To renew your membership, use the secure Square checkout link below. This will open Square’s hosted checkout page,
+      where you can complete your renewal payment safely online.
+    </p>
+
+    <div class="renewal-actions">
+      <a
+        href="https://checkout.square.site/merchant/MXDEH3T3NQC2H/checkout/H6E3XDIN7O5PEMLCWUX3BMSJ"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-green"
+      >
+        Continue to Secure Renewal Checkout
+      </a>
+    </div>
+
+    <p class="renewal-note">
+      You will be taken to a secure external payment page hosted by Square.
+    </p>
   </section>
-  -->
 
-  <!-- About Links  -->
   <div id="membership-links"></div>
-
 </main>
-
 
 <div id="site-footer"></div>
 
@@ -44,6 +69,7 @@
     .then(r => r.text())
     .then(html => { document.getElementById("site-header").innerHTML = html; })
     .catch(err => console.error(err));
+
   fetch("IDSW%20footer.html")
     .then(r => r.text())
     .then(html => { document.getElementById("site-footer").innerHTML = html; })
@@ -53,13 +79,12 @@
   fetch("IDSW%20membership-links.html")
     .then(r => r.text())
     .then(html => {
-    document.getElementById("membership-links").innerHTML = html;
+      document.getElementById("membership-links").innerHTML = html;
 
-    // remove one button if requested
-    if (typeof HIDE_ABOUT_LINK !== "undefined" && HIDE_ABOUT_LINK) {
+      if (typeof HIDE_ABOUT_LINK !== "undefined" && HIDE_ABOUT_LINK) {
         const btn = document.getElementById(HIDE_ABOUT_LINK);
         if (btn) btn.remove();
-    }
+      }
     })
     .catch(err => console.error(err));
 </script>

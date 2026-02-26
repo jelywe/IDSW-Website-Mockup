@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>IDSW – Advocacy</title>
+  <link rel="stylesheet" href="IDSW style.css">
+  <style>
+    .advocacy-intro {
+      margin-bottom: 18px;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 900px;
+    }
+
+    .advocacy-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 14px;
+    }
+
+    .advocacy-card {
+      display: block;
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+      border: 1px solid rgba(0,0,0,0.06);
+      text-decoration: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+    }
+
+    .advocacy-card:hover,
+    .advocacy-card:focus {
+      transform: translateY(-2px);
+      background: #f7fbff;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+      border-color: rgba(31, 74, 138, 0.16);
+      outline: none;
+    }
+
+    .advocacy-card h2 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      color: var(--brand-ink);
+    }
+
+    .advocacy-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .advocacy-meta {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #666;
+    }
+
+    .advocacy-note {
+      margin-top: 20px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 900px) {
+      .advocacy-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main>
+    <div class="directory-header">
+      <h1>Advocacy</h1>
+      <p>IDSW supports advocacy efforts that strengthen infectious diseases care, public health, and the ID workforce across Washington State.</p>
+    </div>
+
+    <div class="advocacy-intro">
+      Through policy engagement, education, and member-informed outreach, IDSW works to elevate infectious diseases issues that affect patients, clinicians, and communities. Use the sections below to explore policy priorities, view past advocacy efforts, or share a story that may help inform future work.
+    </div>
+
+    <section class="advocacy-grid">
+      <a href="IDSW policy.html" class="advocacy-card">
+        <h2>Policy Positions</h2>
+        <p>Read IDSW’s general advocacy priorities and policy positions on access to care, stewardship, public health, prevention, and workforce issues.</p>
+        <div class="advocacy-meta">What we stand for</div>
+      </a>
+
+      <a href="IDSW advocacy-actions.html" class="advocacy-card">
+        <h2>Advocacy Actions</h2>
+        <p>Review examples of advocacy work IDSW has undertaken, including testimony, letters, coalition efforts, and other public-facing action.</p>
+        <div class="advocacy-meta">What we’ve done</div>
+      </a>
+
+      <a href="IDSW submit-story.html" class="advocacy-card">
+        <h2>Submit a Story</h2>
+        <p>Share real-world examples from practice that highlight systems, policy, or access issues affecting infectious diseases care in Washington.</p>
+        <div class="advocacy-meta">Help inform future advocacy</div>
+      </a>
+    </section>
+
+    <div class="advocacy-note">
+      Advocacy priorities and activities may evolve over time based on emerging issues, member input, and the needs of patients and communities.
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script>
+    fetch("IDSW%20header.html")
+      .then(r => {
+        if (!r.ok) throw new Error("Failed to load header.html");
+        return r.text();
+      })
+      .then(html => {
+        document.getElementById("site-header").innerHTML = html;
+      })
+      .catch(err => console.error(err));
+
+    fetch("IDSW%20footer.html")
+      .then(r => {
+        if (!r.ok) throw new Error("Failed to load footer.html");
+        return r.text();
+      })
+      .then(html => {
+        document.getElementById("site-footer").innerHTML = html;
+      })
+      .catch(err => console.error(err));
+  </script>
+</body>
+</html>

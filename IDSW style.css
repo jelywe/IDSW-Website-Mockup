@@ -156,6 +156,21 @@ height: 12px;   /* matches your gap-ish area */
   opacity: 0.9;
 }
 
+/* Dropdown links */
+.dropdown a.member-only-link {
+  background:#f0f0f0;
+  border-radius: 8px;
+  color: #666666;
+}
+
+/*keep hover a bit darker */
+.dropdown a.member-only > .nav-link:hover,
+.dropdown a.member-only > .nav-link:focus {
+  background: #dddddd;
+  color: #333333;
+}
+
+
 
 /* Footer */
 footer {
@@ -440,7 +455,35 @@ footer {
   .btn-login:hover{
     background: rgba(255,255,255,0.12);
   }
+
   
+  .btn-member-only {
+    padding: 12px 18px;
+    border-radius: 999px;
+    font-size: 15px;
+    cursor: pointer;
+    background: #e9e9e9;
+    color: #444444;
+    border: none;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+  .btn-member-only:hover,
+  .btn-member-only:focus {
+    background: #dddddd;
+    border-color: #bdbdbd;
+    color: #333333;
+    text-decoration: none;
+    outline: none;
+  }
+  
+  .btn-member-only:visited {
+    color: #444444;
+  }
   
 
 /* Avatars */
@@ -613,3 +656,53 @@ footer {
     font-size: 14px;
     color: #555;
   }
+
+
+  /* EVENT STUFF */
+    .event-meta {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+
+    .event-date-badge {
+      width: 80px;
+      height: 80px;
+      min-width: 80px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-radius: 14px;
+      padding: 6px;
+      background: #eef4ff;
+      border: 1px solid #d7e4ff;
+      color: #1f4a8a;
+      font-weight: 700;
+      line-height: 1.05;
+      text-align: center;
+    }
+
+
+    .event-date-badge .month {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .event-date-badge .day {
+      display: block;
+      font-size: 24px;
+      margin-top: 2px;
+    }
+
+    .event-date-badge .year {
+      display: block;
+      font-size: 11px;
+      margin-top: 4px;
+      font-weight: 600;
+      opacity: 0.85;
+    }

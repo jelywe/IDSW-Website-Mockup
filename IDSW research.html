@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>IDSW – Research Projects Directory</title>
+  <link rel="stylesheet" href="IDSW style.css">
+  <style>
+    .results-meta {
+      font-size: 13px;
+      color: #666;
+      margin: 10px 2px 12px;
+    }
+
+    .project-meta {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    .status-badge {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      background: #eef4ff;
+      color: #1f4a8a;
+      border: 1px solid #d7e4ff;
+    }
+
+    .status-badge.open {
+      background: #ecfdf3;
+      color: #166534;
+      border-color: #ccebd7;
+    }
+
+    .status-badge.closed {
+      background: #f5f5f5;
+      color: #555;
+      border-color: #dddddd;
+    }
+
+    .status-badge.pending {
+      background: #fff8e8;
+      color: #8a5a00;
+      border-color: #f3dfab;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .card-actions a,
+    .card-actions button {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main>
+    <div class="directory-header">
+      <h1>Research Projects Directory</h1>
+      <p>Browse infectious diseases research studies and clinical projects by condition, institution, and enrollment status.</p>
+    </div>
+
+    <!-- Search + filters -->
+    <section class="search-filter-bar">
+      <div>
+        <label for="search">Search by project title, institution, condition, or keyword</label>
+        <input id="search" type="text" placeholder="e.g., HIV, C. difficile, Seattle, vaccine, transplant">
+      </div>
+      <div>
+        <label for="region">Region</label>
+        <select id="region">
+          <option value="">All regions</option>
+          <option>Puget Sound</option>
+          <option>Eastern Washington</option>
+          <option>Southwest Washington</option>
+          <option>Northwest Washington</option>
+        </select>
+      </div>
+      <div>
+        <label for="specialty">Condition / Topic</label>
+        <select id="specialty">
+          <option value="">All conditions</option>
+          <option>HIV</option>
+          <option>STIs</option>
+          <option>Transplant ID</option>
+          <option>Mycology</option>
+          <option>Antimicrobial Resistance</option>
+          <option>Vaccines</option>
+        </select>
+      </div>
+      <div>
+        <label for="status">Enrollment Status</label>
+        <select id="status">
+          <option value="">All statuses</option>
+          <option>Enrolling</option>
+          <option>Not Enrolling</option>
+          <option>Completed</option>
+          <option>Coming Soon</option>
+        </select>
+      </div>
+    </section>
+
+    <div class="results-meta">
+      Showing example research projects. Final listings can include official study links, IRB-approved contact details, and recruitment updates.
+    </div>
+
+    <!-- Directory cards -->
+    <section class="directory-list">
+
+      <article class="directory-card">
+        <div class="member-avatar">HIV</div>
+        <div class="card-result">
+          <h2>[Project Title] – HIV Outcomes Study</h2>
+          <div class="title-line">Seattle, WA • University-Affiliated Research Center • Puget Sound</div>
+          <div class="specialty">Condition of Interest: HIV</div>
+          <div class="project-meta">Study Type: Observational Cohort • Population: Adults living with HIV</div>
+          <div class="status-badge open">Enrolling</div>
+        </div>
+        <div class="card-actions">
+          <a href="[Trial Link]" class="btn-tertiary" target="_blank" rel="noopener noreferrer">View trial</a>
+          <a href="mailto:[Contact Email]" class="btn-tertiary">Contact</a>
+        </div>
+      </article>
+
+      <article class="directory-card">
+        <div class="member-avatar">CDI</div>
+        <div class="card-result">
+          <h2>[Project Title] – C. difficile Treatment Trial</h2>
+          <div class="title-line">Tacoma, WA • Hospital Research Program • Puget Sound</div>
+          <div class="specialty">Condition of Interest: Clostridioides difficile infection</div>
+          <div class="project-meta">Study Type: Interventional Trial • Population: Adults with recurrent CDI</div>
+          <div class="status-badge open">Enrolling</div>
+        </div>
+        <div class="card-actions">
+          <a href="[Trial Link]" class="btn-tertiary" target="_blank" rel="noopener noreferrer">View trial</a>
+          <a href="mailto:[Contact Email]" class="btn-tertiary">Contact</a>
+        </div>
+      </article>
+
+      <article class="directory-card">
+        <div class="member-avatar">TX</div>
+        <div class="card-result">
+          <h2>[Project Title] – Transplant Infection Surveillance Project</h2>
+          <div class="title-line">Seattle, WA • Academic Medical Center • Puget Sound</div>
+          <div class="specialty">Condition of Interest: Transplant-Associated Infections</div>
+          <div class="project-meta">Study Type: Registry / Surveillance • Population: Solid organ transplant recipients</div>
+          <div class="status-badge closed">Not Enrolling</div>
+        </div>
+        <div class="card-actions">
+          <a href="[Trial Link]" class="btn-tertiary" target="_blank" rel="noopener noreferrer">View trial</a>
+          <a href="mailto:[Contact Email]" class="btn-tertiary">Contact</a>
+        </div>
+      </article>
+
+      <article class="directory-card">
+        <div class="member-avatar">FNG</div>
+        <div class="card-result">
+          <h2>[Project Title] – Invasive Fungal Infections Registry</h2>
+          <div class="title-line">Spokane, WA • Regional Research Network • Eastern Washington</div>
+          <div class="specialty">Condition of Interest: Mycology / Invasive Fungal Disease</div>
+          <div class="project-meta">Study Type: Prospective Registry • Population: Immunocompromised patients</div>
+          <div class="status-badge pending">Coming Soon</div>
+        </div>
+        <div class="card-actions">
+          <a href="[Trial Link]" class="btn-tertiary" target="_blank" rel="noopener noreferrer">View trial</a>
+          <a href="mailto:[Contact Email]" class="btn-tertiary">Contact</a>
+        </div>
+      </article>
+
+      <article class="directory-card">
+        <div class="member-avatar">VAX</div>
+        <div class="card-result">
+          <h2>[Project Title] – Adult Vaccine Response Study</h2>
+          <div class="title-line">Vancouver, WA • Community Research Site • Southwest Washington</div>
+          <div class="specialty">Condition of Interest: Vaccines / Preventive Infectious Diseases</div>
+          <div class="project-meta">Study Type: Prospective Clinical Study • Population: Adults age 18+</div>
+          <div class="status-badge closed">Completed</div>
+        </div>
+        <div class="card-actions">
+          <a href="[Trial Link]" class="btn-tertiary" target="_blank" rel="noopener noreferrer">View trial</a>
+          <a href="mailto:[Contact Email]" class="btn-tertiary">Contact</a>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script>
+    fetch("IDSW%20header.html")
+      .then(r => {
+        if (!r.ok) throw new Error("Failed to load header.html");
+        return r.text();
+      })
+      .then(html => {
+        document.getElementById("site-header").innerHTML = html;
+      })
+      .catch(err => console.error(err));
+
+    fetch("IDSW%20footer.html")
+      .then(r => {
+        if (!r.ok) throw new Error("Failed to load footer.html");
+        return r.text();
+      })
+      .then(html => {
+        document.getElementById("site-footer").innerHTML = html;
+      })
+      .catch(err => console.error(err));
+  </script>
+</body>
+</html>

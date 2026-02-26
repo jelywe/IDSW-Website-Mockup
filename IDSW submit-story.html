@@ -6,34 +6,6 @@
   <link rel="stylesheet" href="IDSW style.css">
   
   <style>
-    /*
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
-
-    .card {
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 28px 28px 32px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.03);
-    }
-
-
-    h1 {
-      font-size: 28px;
-      margin-bottom: 6px;
-    }
-    */
-
-    /* USING
-      .alert-banner
-    */
-
-
     form {
       display: flex;
       flex-direction: column;
@@ -45,6 +17,19 @@
       display: flex;
       flex-direction: column;
       gap: 6px;
+    }
+
+    .date-field {
+      max-width: 200px;
+    }
+
+    .small-comment-group {
+      margin-left: 50px;
+      max-width: 680px;
+    }
+
+    .small-comment-box {
+      min-height: 60px;
     }
 
     label {
@@ -77,16 +62,12 @@
     .inline-options {
       display: flex;
       flex-direction: column;
-      flex-wrap: wrap;
-      gap: 10px 22px;
+      gap: 10px;
       font-size: 13px;
     }
 
     .inline-options label {
       font-weight: 400;
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
 
     .section-title {
@@ -103,206 +84,296 @@
 
     .submit-row {
       display: flex;
-      justify-content: flex-end;
+      justify-content: center;
       margin-top: 10px;
     }
 
-    .btn-primary {
-      background: #123456;
-      color: #ffffff;
-      border-radius: 999px;
-      border: none;
-      padding: 12px 24px;
-      font-size: 15px;
+    /* Shared option-row styling */
+    .option-list {
+      gap: 8px;
+    }
+
+    .option-row {
+      display: grid;
+      grid-template-columns: auto auto 1fr;
+      align-items: center;
+      gap: 8px 12px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: #fafafa;
+      border: 1px solid transparent;
+      font-weight: 400;
       cursor: pointer;
     }
 
+    .option-row input[type="radio"],
+    .option-row input[type="checkbox"] {
+      margin: 0;
+    }
+
+    .option-label {
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    .option-note {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.4;
+    }
+
+    .option-row:has(input[type="radio"]:checked),
+    .option-row:has(input[type="checkbox"]:checked) {
+      background: #f0f0f0;
+      border-color: #d8d8d8;
+    }
+
+    .option-row:has(input[type="radio"]:checked) .option-label,
+    .option-row:has(input[type="checkbox"]:checked) .option-label {
+      font-weight: 700;
+      color: var(--brand-ink);
+    }
+
+    /* Mobile */
+    @media (max-width: 760px) {
+      .option-row {
+        grid-template-columns: auto 1fr;
+      }
+
+      .option-note {
+        grid-column: 2;
+      }
+    }
   </style>
 </head>
 <body>
   <div id="site-header"></div>
 
+  <main>
+    <section class="section-card">
+      <h1>Submit a Story</h1>
+      <p class="subtitle">
+        Share an experience from your infectious diseases practice that highlights a systems or
+        policy issue in Washington State.
+      </p>
 
-<main>
-
-  <section class="section-card">
-    <h1>Submit a Story</h1>
-    <p class="subtitle">
-      Share an experience from your infectious diseases practice that highlights a systems or
-      policy issue in Washington State.
-    </p>
-
-    <div class="alert-banner">
-      <strong>Important:</strong> This site is <strong>NOT HIPPA compliant</strong>.  Please <strong>do not</strong> include patient names, dates of
-      birth, MRNs, or any other patient identifiers.
-    </div>
-
-    <form>
-      <!-- Basic info -->
-      <div class="field-group">
-        <span class="section-title">1. Basic information</span>
+      <div class="alert-banner">
+        <strong>Important:</strong> This site is <strong>NOT HIPAA compliant</strong>. Please <strong>do not</strong> include patient names, dates of
+        birth, MRNs, or any other patient identifiers.
       </div>
 
-      <div class="field-group">
-        <label for="date">Date</label>
-        <input id="date" type="date" value="">
-        <div class="help-text">Use today’s date or the approximate date of the event.</div>
-      </div>
-
-      <div class="field-group">
-        <label>Submitter visibility</label>
-        <div class="inline-options">
-          <label><input type="radio" name="submitter" checked> Submit anonnymously</label>
-          <div class="help-text">No one, including IDSW leadership, will have access to your name.</div>
-          <label><input type="radio" name="submitter" checked> Share my name with IDSW leadership only</label>
-          <div class="help-text">Your name will not be shared outside of internal IDSW communications</div>
-          <label><input type="radio" name="submitter" checked> Allow my name to be publically associated the the below story</label>
+      <form>
+        <!-- Basic info -->
+        <div class="field-group">
+          <span class="section-title">1. Basic information</span>
         </div>
-      </div>
 
-      <div class="divider"></div>
-
-      <!-- Context -->
-      <div class="field-group">
-        <span class="section-title">2. Context</span>
-      </div>
-
-      <div class="field-group">
-        <label for="location">Location (region/county)</label>
-        <input id="location" type="text" placeholder="e.g., King County, Eastern WA, Southwest region">
-      </div>
-
-      <div class="field-group">
-        <label for="context">Clinical context</label>
-        <select id="context">
-          <option value="">Select one</option>
-          <option>Inpatient – academic medical center</option>
-          <option>Inpatient – community hospital</option>
-          <option>Outpatient ID clinic</option>
-          <option>Long-term care / skilled nursing facility</option>
-          <option>Public health / health department</option>
-          <option>Other</option>
-        </select>
-      </div>
-
-      <div class="divider"></div>
-
-      <!-- Topics -->
-      <div class="field-group">
-        <span class="section-title">3. Issues and topics</span>
-      </div>
-
-      <div class="field-group">
-        <label>What issues does this story relate to? (Select all that apply.)</label>
-        <div class="inline-options">
-          <label><input type="checkbox" name="issues" value="access_id_consult">
-            Access to ID consultation
-          </label>
-          <label><input type="checkbox" name="issues" value="antimicrobial_stewardship">
-            Antimicrobial stewardship resources
-          </label>
-          <label><input type="checkbox" name="issues" value="reimbursement_payment">
-            Reimbursement / payment
-          </label>
-          <label><input type="checkbox" name="issues" value="workforce_capacity">
-            Workforce capacity / burnout
-          </label>
-          <label><input type="checkbox" name="issues" value="infection_prevention">
-            Infection prevention &amp; control
-          </label>
-          <label><input type="checkbox" name="issues" value="rural_access">
-            Rural / geographic access to care
-          </label>
-          <label><input type="checkbox" name="issues" value="diagnostics_lab">
-            Diagnostics / laboratory issues
-          </label>
-          <label><input type="checkbox" name="issues" value="public_health_coordination">
-            Coordination with public health
-          </label>
-          <label><input type="checkbox" name="issues" value="other" id="issues-other-check">
-            Other (please describe)
-          </label>
+        <div class="field-group date-field">
+          <label for="date">Date</label>
+          <input id="date" type="date" value="">
+          <div class="help-text">Use today’s date or the approximate date of the event.</div>
         </div>
-      </div>
 
-      <div class="field-group">
-        <label for="issues-other-text">If “Other,” please briefly describe:</label>
-        <textarea id="issues-other-text" name="issues_other"
-          placeholder="e.g., supply chain, telehealth barriers, data/reporting requirements, etc."></textarea>
-        <div class="help-text">
-          <!--You can use this space to add nuance or describe issues not listed above.-->
+        <div class="field-group">
+          <label>Submitter visibility</label>
+
+          <div class="inline-options option-list">
+            <label class="option-row">
+              <input type="radio" name="submitter" value="anonymous" checked>
+              <span class="option-label">Submit anonymously</span>
+              <span class="option-note">No one, including IDSW leadership, will have access to your name.</span>
+            </label>
+
+            <label class="option-row">
+              <input type="radio" name="submitter" value="leadership-only">
+              <span class="option-label">Share my name with IDSW leadership only</span>
+              <span class="option-note">Your name will not be shared outside of internal IDSW communications.</span>
+            </label>
+
+            <label class="option-row">
+              <input type="radio" name="submitter" value="public">
+              <span class="option-label">Allow my name to be publicly associated with the story below</span>
+              <span class="option-note">Your name may be included if the story is used externally.</span>
+            </label>
+          </div>
         </div>
-      </div>
 
-      <div class="divider"></div>
+        <div class="divider"></div>
 
-      <!-- Story -->
-      <div class="field-group">
-        <span class="section-title">4. Your story (no PHI)</span>
-      </div>
-
-      <div class="field-group">
-        <label for="story">Story</label>
-        <textarea id="story" placeholder="Describe what happened, what made the situation challenging or successful, and what system or policy changes might have made a difference. Avoid any patient identifiers."></textarea>
-      </div>
-
-      <div class="divider"></div>
-
-      <!-- Dissemination -->
-      <div class="field-group">
-        <span class="section-title">5. How IDSW may use this story</span>
-      </div>
-
-      <div class="field-group">
-        <label>Limitations for dissemination (check all that apply):</label>
-        <div class="inline-options">
-          <label><input type="checkbox" checked> Internal IDSW awareness only</label>
-          <label><input type="checkbox"> OK for semi-private use (e.g., meetings with legislators)</label>
-          <label><input type="checkbox"> OK for public use (e.g., de-identified in testimony or social media)</label>
+        <!-- Context -->
+        <div class="field-group">
+          <span class="section-title">2. Context</span>
         </div>
-      </div>
 
-      <div class="field-group">
-        <label>Follow-up</label>
-        <div class="inline-options">
-          <label><input type="radio" name="followup" checked> Yes, I’d like to be contacted if this story is used</label>
-          <label><input type="radio" name="followup"> No, I do not want follow-up</label>
+        <div class="field-group">
+          <label for="location">Location (region/county)</label>
+          <input id="location" type="text" placeholder="e.g., King County, Eastern WA, Southwest region">
         </div>
-        <div class="help-text">If yes, IDSW will contact you using the email associated with your member account.</div>
-      </div>
 
-      <div class="submit-row">
-        <button type="submit" class="btn-primary">Submit Story</button>
-      </div>
-    </form>
-  </section>
-</main>
+        <div class="field-group">
+          <label for="context">Clinical context</label>
+          <select id="context">
+            <option value="">Select one</option>
+            <option>Inpatient – academic medical center</option>
+            <option>Inpatient – community hospital</option>
+            <option>Outpatient ID clinic</option>
+            <option>Long-term care / skilled nursing facility</option>
+            <option>Public health / health department</option>
+            <option>Other</option>
+          </select>
+        </div>
 
+        <div class="divider"></div>
 
-<div id="site-footer"></div>
+        <!-- Topics -->
+        <div class="field-group">
+          <span class="section-title">3. Issues and topics</span>
+        </div>
 
-<script>
-  fetch("IDSW%20header.html")
-    .then(r => {
-      if (!r.ok) throw new Error("Failed to load header.html");
-      return r.text();
-    })
-    .then(html => {
-      document.getElementById("site-header").innerHTML = html;
-    })
-    .catch(err => console.error(err));
-    
-  fetch("IDSW%20footer.html")
-    .then(r => {
-      if (!r.ok) throw new Error("Failed to load footer.html");
-      return r.text();
-    })
-    .then(html => {
-      document.getElementById("site-footer").innerHTML = html;
-    })
-    .catch(err => console.error(err));
+        <div class="field-group">
+          <label>What issues does this story relate to? (Select all that apply.)</label>
+          <div class="inline-options">
+            <label><input type="checkbox" name="issues" value="access_id_consult">
+              Access to ID consultation
+            </label>
+            <label><input type="checkbox" name="issues" value="antimicrobial_stewardship">
+              Antimicrobial stewardship resources
+            </label>
+            <label><input type="checkbox" name="issues" value="reimbursement_payment">
+              Reimbursement / payment
+            </label>
+            <label><input type="checkbox" name="issues" value="workforce_capacity">
+              Workforce capacity / burnout
+            </label>
+            <label><input type="checkbox" name="issues" value="infection_prevention">
+              Infection prevention &amp; control
+            </label>
+            <label><input type="checkbox" name="issues" value="rural_access">
+              Rural / geographic access to care
+            </label>
+            <label><input type="checkbox" name="issues" value="diagnostics_lab">
+              Diagnostics / laboratory issues
+            </label>
+            <label><input type="checkbox" name="issues" value="public_health_coordination">
+              Coordination with public health
+            </label>
+            <label><input type="checkbox" name="issues" value="other" id="issues-other-check">
+              Other (please describe)
+            </label>
+          </div>
+        </div>
 
-</script>
+        <div class="field-group small-comment-group">
+          <label for="issues-other-text">If “Other,” please briefly describe:</label>
+          <textarea
+            id="issues-other-text"
+            name="issues_other"
+            class="small-comment-box"
+            placeholder="e.g., supply chain, telehealth barriers, data/reporting requirements, etc."
+          ></textarea>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Story -->
+        <div class="field-group">
+          <span class="section-title">4. Your story (no PHI)</span>
+        </div>
+
+        <div class="field-group">
+          <label for="story">Story</label>
+          <textarea id="story" placeholder="Describe what happened, what made the situation challenging or successful, and what system or policy changes might have made a difference. Avoid any patient identifiers."></textarea>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Dissemination -->
+        <div class="field-group">
+          <span class="section-title">5. How IDSW may use this story</span>
+        </div>
+
+        <div class="field-group">
+          <label>Limitations for dissemination</label>
+        
+          <div class="inline-options option-list">
+            <label class="option-row">
+              <input type="radio" name="dissemination" value="internal-only" checked>
+              <span class="option-label">Internal IDSW awareness only</span>
+              <span class="option-note">Used only within IDSW for internal review and planning.</span>
+            </label>
+        
+            <label class="option-row">
+              <input type="radio" name="dissemination" value="semi-private">
+              <span class="option-label">OK for semi-private use</span>
+              <span class="option-note">May be used in settings such as meetings with legislators or partner discussions, but may not be made available to the public.</span>
+            </label>
+        
+            <label class="option-row">
+              <input type="radio" name="dissemination" value="public-use">
+              <span class="option-label">OK for public use</span>
+              <span class="option-note">May be shared publicly in de-identified form, such as testimony or social media.</span>
+            </label>
+          </div>
+        </div>
+        
+        <div class="field-group small-comment-group">
+          <label for="dissemination-comment">Additional comments (optional)</label>
+          <textarea
+            id="dissemination-comment"
+            name="dissemination_comment"
+            class="small-comment-box"
+            placeholder="Any added limits or preferences."
+          ></textarea>
+        </div>
+
+        <div class="field-group">
+          <label>Follow-up</label>
+
+          <div class="inline-options option-list">
+            <label class="option-row">
+              <input type="radio" name="followup" value="yes" checked>
+              <span class="option-label">Yes, I’d like to be contacted if this story is used</span>
+              <span class="option-note">IDSW may contact you using the email associated with your member account.</span>
+            </label>
+
+            <label class="option-row">
+              <input type="radio" name="followup" value="no">
+              <span class="option-label">No, I do not want follow-up</span>
+              <span class="option-note">IDSW may still review the story, but you will not be contacted about it.</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="submit-row">
+          <button type="submit" class="btn-green">Submit Story</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script>
+    fetch("IDSW%20header.html")
+      .then(r => {
+        if (!r.ok) throw new Error("Failed to load header.html");
+        return r.text();
+      })
+      .then(html => {
+        document.getElementById("site-header").innerHTML = html;
+      })
+      .catch(err => console.error(err));
+      
+    fetch("IDSW%20footer.html")
+      .then(r => {
+        if (!r.ok) throw new Error("Failed to load footer.html");
+        return r.text();
+      })
+      .then(html => {
+        document.getElementById("site-footer").innerHTML = html;
+      })
+      .catch(err => console.error(err));
+  </script>
 
 </body>
 </html>

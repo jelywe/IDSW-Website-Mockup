@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>IDSW – ID Training Programs</title>
+  <link rel="stylesheet" href="IDSW style.css">
+  <style>
+    .results-meta {
+      font-size: 13px;
+      color: #666;
+      margin: 10px 2px 12px;
+    }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main>
+    <div class="directory-header">
+      <h1>Infectious Diseases Training Programs</h1>
+      <p>Explore infectious diseases training opportunities in Washington State for physicians, microbiology laboratory trainees, and pharmacists.</p>
+    </div>
+
+    <!-- Search + filters -->
+    <section class="search-filter-bar">
+      <div>
+        <label for="search">Search by program name, institution, city, or training focus</label>
+        <input id="search" type="text" placeholder="e.g., UW, Seattle, ID Fellowship, Microbiology, Antimicrobial Stewardship">
+      </div>
+      <div>
+        <label for="region">Region</label>
+        <select id="region">
+          <option value="">All regions</option>
+          <option>Puget Sound</option>
+          <option>Eastern Washington</option>
+          <option>Southwest Washington</option>
+          <option>Northwest Washington</option>
+        </select>
+      </div>
+      <div>
+        <label for="specialty">Program Type</label>
+        <select id="specialty">
+          <option value="">All program types</option>
+          <option>Physician ID Fellowship</option>
+          <option>Microbiology Lab Training</option>
+          <option>Pharmacist ID Fellowship</option>
+          <option>Antimicrobial Stewardship</option>
+          <option>Research Training</option>
+        </select>
+      </div>
+    </section>
+
+    <div class="results-meta">
+      Showing example training programs. Final listings can include links, application details, and contact information.
+    </div>
+
+    <!-- Directory cards -->
+    <section class="directory-list">
+
+      <article class="directory-card">
+        <div class="member-avatar">UW</div>
+        <div class="card-result">
+          <h2>[Program Name] – Physician Infectious Diseases Fellowship</h2>
+          <div class="title-line">Seattle, WA • University of Washington • Puget Sound</div>
+          <div class="specialty">Focus: Adult Infectious Diseases, HIV, Transplant ID, Global Health</div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-tertiary">View program</button>
+        </div>
+      </article>
+
+      <article class="directory-card">
+        <div class="member-avatar">CH</div>
+        <div class="card-result">
+          <h2>[Program Name] – Clinical Microbiology Laboratory Training</h2>
+          <div class="title-line">Seattle, WA • Academic Medical Center • Puget Sound</div>
+          <div class="specialty">Focus: Bacteriology, Mycology, Virology, Molecular Diagnostics</div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-tertiary">View program</button>
+        </div>
+      </article>
+
+      <article class="directory-card">
+        <div class="member-avatar">PH</div>
+        <div class="card-result">
+          <h2>[Program Name] – Infectious Diseases Pharmacy Fellowship</h2>
+          <div class="title-line">Seattle, WA • Health System Pharmacy Program • Puget Sound</div>
+          <div class="specialty">Focus: Antimicrobial Stewardship, HIV, Inpatient ID Consults</div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-tertiary">View program</button>
+        </div>
+      </article>
+
+      <article class="directory-card">
+        <div class="member-avatar">SP</div>
+        <div class="card-result">
+          <h2>[Program Name] – Regional ID Physician Training Track</h2>
+          <div class="title-line">Spokane, WA • Eastern Washington</div>
+          <div class="specialty">Focus: Community ID, OPAT, HIV Care, Rural Practice</div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-tertiary">View program</button>
+        </div>
+      </article>
+
+      <article class="directory-card">
+        <div class="member-avatar">AS</div>
+        <div class="card-result">
+          <h2>[Program Name] – Antimicrobial Stewardship & ID Pharmacy Training</h2>
+          <div class="title-line">Tacoma, WA • Puget Sound</div>
+          <div class="specialty">Focus: Stewardship, Quality Improvement, Clinical ID Pharmacotherapy</div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-tertiary">View program</button>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script>
+    fetch("IDSW%20header.html")
+      .then(r => {
+        if (!r.ok) throw new Error("Failed to load header.html");
+        return r.text();
+      })
+      .then(html => {
+        document.getElementById("site-header").innerHTML = html;
+      })
+      .catch(err => console.error(err));
+      
+    fetch("IDSW%20footer.html")
+      .then(r => {
+        if (!r.ok) throw new Error("Failed to load footer.html");
+        return r.text();
+      })
+      .then(html => {
+        document.getElementById("site-footer").innerHTML = html;
+      })
+      .catch(err => console.error(err));
+  </script>
+
+</body>
+</html>

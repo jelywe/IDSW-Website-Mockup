@@ -2,18 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>IDSW – Practice Directory</title>
+  <title>IDSW – Microbiology Labs Directory</title>
   <link rel="stylesheet" href="IDSW style.css">
   <style>
-
-
-.results-meta {
+    .results-meta {
       font-size: 13px;
       color: #666;
       margin: 10px 2px 12px;
     }
 
-    /* Top split: search left, map right */
     .top-split {
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
@@ -22,7 +19,6 @@
       margin-bottom: 14px;
     }
 
-    /* Make search stacked (each control on its own line) */
     .search-filter-bar.practice-search {
       display: flex;
       flex-direction: column;
@@ -61,7 +57,6 @@
       line-height: 1.5;
     }
 
-    /* Practice directory card tweaks (reuse directory-card styles from your CSS) */
     .practice-meta {
       font-size: 13px;
       color: var(--muted);
@@ -69,7 +64,6 @@
       line-height: 1.4;
     }
 
-    /* Responsive */
     @media (max-width: 900px) {
       .top-split {
         grid-template-columns: 1fr;
@@ -86,18 +80,15 @@
 
   <main>
     <div class="directory-header">
-      <h1> Washington Infectious Diseases Practices Directory</h1>
-      <p>Search infectious diseases practices and clinics across Washington State by region and clinical focus.</p>
+      <h1>Washington Microbiology Labs Directory</h1>
+      <p>Search microbiology laboratories across Washington State by region and lab services.</p>
     </div>
 
-
-    <!-- Top split: Search (left) + Map (right) -->
     <section class="top-split">
-      <!-- Search + filters (stacked) -->
       <section class="search-filter-bar practice-search">
         <div>
-          <label for="search">Search by practice name, health system, city, or focus</label>
-          <input id="search" type="text" placeholder="e.g., Seattle ID, UW, Tacoma, HIV, Travel">
+          <label for="search">Search by lab name, health system, city, or service</label>
+          <input id="search" type="text" placeholder="e.g., Seattle, UW, Spokane, PCR, Blood Culture">
         </div>
 
         <div>
@@ -112,46 +103,43 @@
         </div>
 
         <div>
-          <label for="specialty">Clinical Focus</label>
+          <label for="specialty">Lab Service</label>
           <select id="specialty">
-            <option value="">All focus areas</option>
-            <option>HIV / PrEP</option>
-            <option>STIs</option>
-            <option>Travel Medicine</option>
+            <option value="">All lab services</option>
+            <option>Bacteriology</option>
             <option>Mycology</option>
-            <option>Antimicrobial Stewardship</option>
-            <option>Transplant / Immunocompromised Hosts</option>
+            <option>Virology / PCR</option>
+            <option>Blood Cultures</option>
+            <option>Antimicrobial Susceptibility Testing</option>
+            <option>Molecular Diagnostics</option>
           </select>
         </div>
       </section>
 
-      <!-- Map panel -->
       <aside class="map-panel">
-        <h2>Washington State Map (Placeholder)</h2>
-        <!-- Replace this with your own map image file if you prefer -->
+        <h2>Washington State Map</h2>
         <img
-          src="/Images/Washington Map Placeholder.png"
-          alt="Map of Washington State (placeholder)">
+          src="Images/Washington Map Placeholder.png"
+          alt="Map of Washington State">
         <div class="map-note">
-          Placeholder map image. 
+          Placeholder map image.
         </div>
       </aside>
     </section>
 
     <div class="results-meta">
-      Showing example practices. Actual contact details and visibility can be adjusted based on directory settings.
+      Showing example microbiology labs. Update names, services, and contact details as needed.
     </div>
 
-    <!-- Directory cards – one per row -->
     <section class="directory-list">
 
       <article class="directory-card">
         <div class="member-avatar">UW</div>
         <div class="card-result">
-          <h2>[Practice Name] – University-Affiliated ID Clinic</h2>
+          <h2>[Lab Name] – University Hospital Microbiology Lab</h2>
           <div class="title-line">Seattle, WA • Puget Sound</div>
-          <div class="specialty">Focus: HIV / PrEP, Transplant ID, General ID</div>
-          <div class="practice-meta">Health System: [Placeholder] • Accepting referrals: Yes</div>
+          <div class="specialty">Services: Bacteriology, Virology / PCR, Antimicrobial Susceptibility Testing</div>
+          <div class="practice-meta">Health System: [Placeholder] • Referral testing: Yes</div>
         </div>
         <div class="card-actions">
           <button class="btn-tertiary">View details</button>
@@ -161,10 +149,10 @@
       <article class="directory-card">
         <div class="member-avatar">SP</div>
         <div class="card-result">
-          <h2>[Practice Name] – Community Infectious Diseases</h2>
+          <h2>[Lab Name] – Regional Clinical Microbiology Lab</h2>
           <div class="title-line">Spokane, WA • Eastern Washington</div>
-          <div class="specialty">Focus: General ID, Outpatient parenteral therapy (OPAT)</div>
-          <div class="practice-meta">Health System: [Placeholder] • Accepting referrals: Yes</div>
+          <div class="specialty">Services: Blood Cultures, Bacteriology, Molecular Diagnostics</div>
+          <div class="practice-meta">Health System: [Placeholder] • STAT testing: Available</div>
         </div>
         <div class="card-actions">
           <button class="btn-tertiary">View details</button>
@@ -174,10 +162,10 @@
       <article class="directory-card">
         <div class="member-avatar">TC</div>
         <div class="card-result">
-          <h2>[Practice Name] – Travel &amp; Vaccine Clinic</h2>
+          <h2>[Lab Name] – Community Hospital Micro Lab</h2>
           <div class="title-line">Tacoma, WA • Puget Sound</div>
-          <div class="specialty">Focus: Travel Medicine, Vaccines, Pre-travel counseling</div>
-          <div class="practice-meta">Appointments: New patients welcome • Languages: [Placeholder]</div>
+          <div class="specialty">Services: Bacteriology, Blood Cultures, Susceptibility Testing</div>
+          <div class="practice-meta">Specimen drop-off: Yes • Weekend coverage: [Placeholder]</div>
         </div>
         <div class="card-actions">
           <button class="btn-tertiary">View details</button>
@@ -187,10 +175,10 @@
       <article class="directory-card">
         <div class="member-avatar">VK</div>
         <div class="card-result">
-          <h2>[Practice Name] – Mycology &amp; Complex Infections</h2>
+          <h2>[Lab Name] – Reference Mycology & Molecular Lab</h2>
           <div class="title-line">Vancouver, WA • Southwest Washington</div>
-          <div class="specialty">Focus: Mycology, Immunocompromised hosts, OPAT</div>
-          <div class="practice-meta">Telehealth: Available • Accepting referrals: Limited</div>
+          <div class="specialty">Services: Mycology, Molecular Diagnostics, Send-out Testing</div>
+          <div class="practice-meta">Courier service: Available • Referral testing: Limited</div>
         </div>
         <div class="card-actions">
           <button class="btn-tertiary">View details</button>
@@ -200,31 +188,28 @@
     </section>
   </main>
 
-<div id="site-footer"></div>
+  <div id="site-footer"></div>
 
-<script>
-  fetch("IDSW%20header.html")
-    .then(r => {
-      if (!r.ok) throw new Error("Failed to load header.html");
-      return r.text();
-    })
-    .then(html => {
-      document.getElementById("site-header").innerHTML = html;
-    })
-    .catch(err => console.error(err));
-    
-  fetch("IDSW%20footer.html")
-    .then(r => {
-      if (!r.ok) throw new Error("Failed to load footer.html");
-      return r.text();
-    })
-    .then(html => {
-      document.getElementById("site-footer").innerHTML = html;
-    })
-    .catch(err => console.error(err));
+  <script>
+    fetch("IDSW%20header.html")
+      .then(r => {
+        if (!r.ok) throw new Error("Failed to load header.html");
+        return r.text();
+      })
+      .then(html => {
+        document.getElementById("site-header").innerHTML = html;
+      })
+      .catch(err => console.error(err));
 
-</script>
-
-
+    fetch("IDSW%20footer.html")
+      .then(r => {
+        if (!r.ok) throw new Error("Failed to load footer.html");
+        return r.text();
+      })
+      .then(html => {
+        document.getElementById("site-footer").innerHTML = html;
+      })
+      .catch(err => console.error(err));
+  </script>
 </body>
 </html>

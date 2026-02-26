@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>IDSW – Upcoming Events</title>
+  <link rel="stylesheet" href="IDSW style.css">
+  <style>
+    .results-meta {
+      font-size: 13px;
+      color: #666;
+      margin: 10px 2px 12px;
+    }
+
+    .status-badge {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid transparent;
+    }
+
+    .status-badge.open {
+      background: #ecfdf3;
+      color: #166534;
+      border-color: #ccebd7;
+    }
+
+    .status-badge.limited {
+      background: #fff8e8;
+      color: #8a5a00;
+      border-color: #f3dfab;
+    }
+
+    .status-badge.closed {
+      background: #f5f5f5;
+      color: #555;
+      border-color: #dddddd;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .card-actions a {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main>
+    <div class="directory-header">
+      <h1>Upcoming Events</h1>
+      <p>Browse upcoming IDSW events, educational sessions, and community programs across Washington State.</p>
+    </div>
+
+    <div class="section-actions" style="margin-bottom: 14px;">
+      <a href="IDSW events-past.html" class="btn-green">Go to Past Events</a>
+    </div>
+
+    <section class="search-filter-bar">
+      <div>
+        <label for="search">Search by event name, topic, or city</label>
+        <input id="search" type="text" placeholder="e.g., stewardship, Seattle, vaccines, webinar">
+      </div>
+      <div>
+        <label for="format">Format</label>
+        <select id="format">
+          <option value="">All formats</option>
+          <option>In-person</option>
+          <option>Virtual</option>
+          <option>Hybrid</option>
+        </select>
+      </div>
+      <div>
+        <label for="type">Event Type</label>
+        <select id="type">
+          <option value="">All event types</option>
+          <option>Webinar</option>
+          <option>Grand Rounds</option>
+          <option>Community Education</option>
+          <option>Conference</option>
+          <option>Networking</option>
+        </select>
+      </div>
+    </section>
+
+    <div class="results-meta">
+      Showing example upcoming events. Replace placeholder dates, links, and registration details as needed.
+    </div>
+
+    <section class="directory-list">
+
+      <article class="directory-card" data-date="2026-03-14">
+        <div class="event-date-badge">
+          <span class="month">Mar</span>
+          <span class="day">14</span>
+          <span class="year">2026</span>
+        </div>
+        <div class="card-result">
+          <h2>[Event Title] – Antimicrobial Stewardship Update</h2>
+          <div class="title-line">March 14, 2026</div>
+          <div class="specialty">Topic: Antimicrobial Stewardship</div>
+          <div class="event-meta">Seattle, WA • In-person • Time: 12:00 PM – 1:00 PM • Host: IDSW Education Committee</div>
+          <div class="status-badge open">Registration Open</div>
+        </div>
+        <div class="card-actions">
+          <a href="[Event Details Link]" class="btn-secondary">View Details</a>
+          <a href="[Registration Link]" class="btn-secondary">Register</a>
+        </div>
+      </article>
+
+      <article class="directory-card" data-date="2026-04-05">
+        <div class="event-date-badge">
+          <span class="month">Apr</span>
+          <span class="day">05</span>
+          <span class="year">2026</span>
+        </div>
+        <div class="card-result">
+          <h2>[Event Title] – ID Case Conference Webinar</h2>
+          <div class="title-line">April 5, 2026</div>
+          <div class="specialty">Topic: Complex Infectious Diseases Cases</div>
+          <div class="event-meta">Virtual • Time: 5:30 PM – 6:30 PM • Audience: Members and trainees</div>
+          <div class="status-badge open">Registration Open</div>
+        </div>
+        <div class="card-actions">
+          <a href="[Event Details Link]" class="btn-secondary">View Details</a>
+          <a href="[Registration Link]" class="btn-secondary">Register</a>
+        </div>
+      </article>
+
+      <article class="directory-card" data-date="2026-04-21">
+        <div class="event-date-badge">
+          <span class="month">Apr</span>
+          <span class="day">21</span>
+          <span class="year">2026</span>
+        </div>
+        <div class="card-result">
+          <h2>[Event Title] – Community Vaccine Education Night</h2>
+          <div class="title-line">April 21, 2026</div>
+          <div class="specialty">Topic: Vaccines and Public Health</div>
+          <div class="event-meta">Tacoma, WA • Hybrid • Time: 6:00 PM – 7:30 PM • Hosted with local community partners</div>
+          <div class="status-badge limited">Limited Space</div>
+        </div>
+        <div class="card-actions">
+          <a href="[Event Details Link]" class="btn-secondary">View Details</a>
+          <a href="[Registration Link]" class="btn-secondary">Register</a>
+        </div>
+      </article>
+
+      <article class="directory-card" data-date="2026-05-09">
+        <div class="event-date-badge">
+          <span class="month">May</span>
+          <span class="day">09</span>
+          <span class="year">2026</span>
+        </div>
+        <div class="card-result">
+          <h2>[Event Title] – Spring IDSW Regional Meeting</h2>
+          <div class="title-line">May 9, 2026</div>
+          <div class="specialty">Topic: Regional Clinical Infectious Diseases Updates</div>
+          <div class="event-meta">Spokane, WA • In-person • Time: 8:00 AM – 12:00 PM • Includes CME [if applicable]</div>
+          <div class="status-badge open">Registration Open</div>
+        </div>
+        <div class="card-actions">
+          <a href="[Event Details Link]" class="btn-secondary">View Details</a>
+          <a href="[Registration Link]" class="btn-secondary">Register</a>
+        </div>
+      </article>
+
+      <article class="directory-card" data-date="2026-06-02">
+        <div class="event-date-badge">
+          <span class="month">Jun</span>
+          <span class="day">02</span>
+          <span class="year">2026</span>
+        </div>
+        <div class="card-result">
+          <h2>[Event Title] – Travel Medicine Updates Webinar</h2>
+          <div class="title-line">June 2, 2026</div>
+          <div class="specialty">Topic: Travel Medicine</div>
+          <div class="event-meta">Virtual • Time: 7:00 AM – 8:00 AM • Speaker: [Placeholder]</div>
+          <div class="status-badge closed">Registration Coming Soon</div>
+        </div>
+        <div class="card-actions">
+          <a href="[Event Details Link]" class="btn-secondary">View Details</a>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script>
+    fetch("IDSW%20header.html")
+      .then(r => {
+        if (!r.ok) throw new Error("Failed to load header.html");
+        return r.text();
+      })
+      .then(html => {
+        document.getElementById("site-header").innerHTML = html;
+      })
+      .catch(err => console.error(err));
+
+    fetch("IDSW%20footer.html")
+      .then(r => {
+        if (!r.ok) throw new Error("Failed to load footer.html");
+        return r.text();
+      })
+      .then(html => {
+        document.getElementById("site-footer").innerHTML = html;
+      })
+      .catch(err => console.error(err));
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const list = document.querySelector(".directory-list");
+      if (!list) return;
+
+      const cards = Array.from(list.querySelectorAll(".directory-card"));
+
+      cards.sort((a, b) => {
+        const dateA = new Date(a.dataset.date || "");
+        const dateB = new Date(b.dataset.date || "");
+        return dateA - dateB;
+      });
+
+      cards.forEach(card => list.appendChild(card));
+    });
+  </script>
+</body>
+</html>

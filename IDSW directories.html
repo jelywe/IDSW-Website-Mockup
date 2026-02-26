@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>IDSW – Directories</title>
+  <link rel="stylesheet" href="IDSW style.css">
+  <style>
+    .directories-intro {
+      margin-bottom: 18px;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 900px;
+    }
+
+    .directories-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 14px;
+    }
+
+    .directory-hub-card {
+        display: block;
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+        border: 1px solid rgba(0,0,0,0.06);
+        text-decoration: none;
+        transition:
+            transform 0.15s ease,
+            box-shadow 0.15s ease,
+            border-color 0.15s ease,
+            background-color 0.15s ease;
+        cursor: pointer;
+    }
+
+    .directory-hub-card:hover,
+    .directory-hub-card:focus {
+        transform: translateY(-3px);
+        background-color: #f7fbff; /* light blue-tinted hover */
+        box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+        border-color: rgba(31, 74, 138, 0.22);
+        outline: none;
+    }
+
+    .directory-hub-card h2 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      color: var(--brand-ink);
+    }
+
+    .directory-hub-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .directory-hub-meta {
+      font-size: 12px;
+      color: #666;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 900px) {
+      .directories-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main>
+    <div class="directory-header">
+      <h1>Directories</h1>
+      <p>Browse IDSW directories for members, programs, practices, research opportunities, and organizational leadership.</p>
+    </div>
+
+    <div class="directories-intro">
+      Use this section as a central hub for finding people, programs, and resources across the Infectious Diseases Society of Washington community. Select a directory below to explore detailed listings.
+    </div>
+
+    <section class="directories-grid">
+
+      <a href="IDSW leadership.html" class="directory-hub-card">
+        <h2>Leadership</h2>
+        <p>View IDSW leadership listings, including current officers, board members, and other organizational leaders.</p>
+        <div class="directory-hub-meta">Board and society leadership information</div>
+      </a>
+
+      <a href="IDSW members.html" class="directory-hub-card">
+        <h2>Members</h2>
+        <p>Search IDSW members across Washington State by name, institution, region, or area of infectious diseases expertise.</p>
+        <div class="directory-hub-meta">Professional member listings and expertise</div>
+      </a>
+
+      <a href="IDSW practices.html" class="directory-hub-card">
+        <h2>ID Practices</h2>
+        <p>Browse infectious diseases practices and clinics by region, city, health system, and clinical focus.</p>
+        <div class="directory-hub-meta">Clinical practices and referral sites</div>
+      </a>
+
+      <a href="IDSW micro-labs.html" class="directory-hub-card">
+        <h2>Micro Labs</h2>
+        <p>Find microbiology laboratories by location and service type, including bacteriology, molecular diagnostics, and mycology.</p>
+        <div class="directory-hub-meta">Clinical microbiology and laboratory services</div>
+      </a>
+
+      <a href="IDSW training.html" class="directory-hub-card">
+        <h2>Training Programs</h2>
+        <p>Explore infectious diseases training opportunities for physicians, microbiology laboratory trainees, and pharmacists.</p>
+        <div class="directory-hub-meta">Fellowships, lab training, and professional development</div>
+      </a>
+
+      <a href="IDSW research.html" class="directory-hub-card">
+        <h2>Research</h2>
+        <p>Browse infectious diseases research projects and studies, including enrollment status, condition of interest, and trial links.</p>
+        <div class="directory-hub-meta">Clinical studies, registries, and research opportunities</div>
+      </a>
+
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script>
+    fetch("IDSW%20header.html")
+      .then(r => {
+        if (!r.ok) throw new Error("Failed to load header.html");
+        return r.text();
+      })
+      .then(html => {
+        document.getElementById("site-header").innerHTML = html;
+      })
+      .catch(err => console.error(err));
+
+    fetch("IDSW%20footer.html")
+      .then(r => {
+        if (!r.ok) throw new Error("Failed to load footer.html");
+        return r.text();
+      })
+      .then(html => {
+        document.getElementById("site-footer").innerHTML = html;
+      })
+      .catch(err => console.error(err));
+  </script>
+</body>
+</html>

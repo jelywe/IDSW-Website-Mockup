@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>IDSW – Contact</title>
+  <link rel="stylesheet" href="IDSW style.css">
+  <style>
+    .contact-intro {
+      margin-bottom: 18px;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 900px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      align-items: start;
+      margin-bottom: 18px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .form-grid label {
+      font-size: 13px;
+      margin-bottom: 6px;
+      display: block;
+      font-weight: 600;
+      color: var(--brand-ink);
+    }
+
+    .form-grid input,
+    .form-grid select,
+    .form-grid textarea {
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      font-size: 14px;
+      width: 100%;
+      background: #fafafa;
+      outline: none;
+    }
+
+    .form-grid input:focus,
+    .form-grid select:focus,
+    .form-grid textarea:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(0,104,48,0.12);
+      background: #ffffff;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .contact-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(0,0,0,0.06);
+      margin-bottom: 14px;
+    }
+
+    .contact-card h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: var(--brand-ink);
+    }
+
+    .contact-card p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .contact-list {
+      margin: 8px 0 0 18px;
+      line-height: 1.7;
+    }
+
+    .contact-list a {
+      text-decoration: none;
+    }
+
+    .response-note {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-top: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main>
+    <div class="directory-header">
+      <h1>Contact</h1>
+      <p>Get in touch with IDSW for general questions, membership support, advocacy inquiries, or educational programming.</p>
+    </div>
+
+    <div class="contact-intro">
+      Use this page to contact the Infectious Diseases Society of Washington. For faster help, choose the topic that best fits your question or use the form below.
+    </div>
+
+    <section class="two-col">
+      <section class="section-card">
+        <h2>Send a Message</h2>
+        <p>
+          Use this form for general inquiries. You can later connect it to email, a form service, or another workflow.
+        </p>
+
+        <form>
+          <div class="form-grid">
+            <div>
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" placeholder="Full name" />
+            </div>
+
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="name@example.com" />
+            </div>
+
+            <div>
+              <label for="topic">Topic</label>
+              <select id="topic" name="topic">
+                <option value="">Select one…</option>
+                <option>General question</option>
+                <option>Membership</option>
+                <option>Events</option>
+                <option>Advocacy</option>
+                <option>Education / speaker request</option>
+                <option>Website issue</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="subject">Subject</label>
+              <input id="subject" name="subject" type="text" placeholder="Brief subject" />
+            </div>
+
+            <div>
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="How can we help?"></textarea>
+            </div>
+          </div>
+
+          <div class="action-actions" style="margin-top: 14px;">
+            <button type="button" class="btn-green">Send Message</button>
+            <button type="reset" class="btn-secondary">Clear</button>
+          </div>
+        </form>
+
+        <div class="response-note">
+          This is a mockup form. The send button can later be connected to a mailto link, form service, or backend endpoint.
+        </div>
+      </section>
+
+      <aside>
+        <div class="contact-card">
+          <h3>General Contact</h3>
+          <p>
+            For general questions about IDSW, please use the contact form or email:
+          </p>
+          <p><strong>[Insert general contact email]</strong></p>
+        </div>
+
+        <div class="contact-card">
+          <h3>Common Topics</h3>
+          <ul class="contact-list">
+            <li>Membership questions and renewals</li>
+            <li>Event registration and programming</li>
+            <li>Advocacy and policy inquiries</li>
+            <li>Website feedback or technical issues</li>
+          </ul>
+        </div>
+
+        <div class="contact-card">
+          <h3>Need Something Else?</h3>
+          <p>
+            For advocacy-related stories, use the dedicated story submission page. For educational speaker requests, use the specialist invitation page.
+          </p>
+          <div class="action-actions" style="margin-top: 10px;">
+            <button class="btn-secondary" onclick="location.href='IDSW submit-story.html'">Submit a Story</button>
+            <button class="btn-secondary" onclick="location.href='IDSW invite.html'">Invite an ID Specialist</button>
+          </div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script>
+    fetch("IDSW%20header.html")
+      .then(r => {
+        if (!r.ok) throw new Error("Failed to load header.html");
+        return r.text();
+      })
+      .then(html => {
+        document.getElementById("site-header").innerHTML = html;
+      })
+      .catch(err => console.error(err));
+
+    fetch("IDSW%20footer.html")
+      .then(r => {
+        if (!r.ok) throw new Error("Failed to load footer.html");
+        return r.text();
+      })
+      .then(html => {
+        document.getElementById("site-footer").innerHTML = html;
+      })
+      .catch(err => console.error(err));
+  </script>
+</body>
+</html>

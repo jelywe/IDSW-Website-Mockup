@@ -2,32 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Invite an ID Doc – IDSW</title>
+  <title>Invite an ID Specialist – IDSW</title>
 
   <link rel="stylesheet" href="IDSW style.css">
 
   <style>
-    /* Page-specific layout additions (uses your existing main/page-hero/section-card/buttons) */
-
     .two-col {
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
+      grid-template-columns: 1.25fr 0.75fr;
       gap: 18px;
       align-items: start;
       margin-bottom: 18px;
     }
 
-    /* Reuse action-panel look, but different padding (per your pattern) */
-    .invite-panel { padding: 26px 28px 24px; }
-    .action-panel { padding: 18px 20px; } /* if not already set elsewhere */
-
-    .invite-panel .muted { margin-top: 6px; }
-
     .form-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px 16px;
-      margin-top: 10px;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 12px;
     }
 
     .form-grid label {
@@ -58,25 +50,15 @@
       background: #ffffff;
     }
 
-    .span-2 { grid-column: 1 / -1; }
-
     textarea {
       min-height: 110px;
       resize: vertical;
     }
 
-    .checklist {
-      margin: 10px 0 0 18px;
-      line-height: 1.7;
-      color: var(--text);
-      font-size: 15px;
-      max-width: 900px;
-    }
-
     .sidebar-card {
       background: var(--card-bg);
       border-radius: 16px;
-      padding: 18px 18px;
+      padding: 18px;
       box-shadow: var(--shadow);
       border: 1px solid rgba(0,0,0,0.06);
     }
@@ -105,10 +87,26 @@
       margin: 4px 6px 0 0;
     }
 
-    /* Responsive */
+    .notice-box {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: #fff8e8;
+      border: 1px solid #f0dfad;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #5f4a12;
+    }
+
+    .simple-list {
+      margin: 10px 0 0 18px;
+      line-height: 1.7;
+      color: var(--text);
+      font-size: 15px;
+    }
+
     @media (max-width: 900px) {
       .two-col { grid-template-columns: 1fr; }
-      .form-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -118,30 +116,37 @@
 
 <main>
   <section class="page-hero">
-    <h1>Invite an ID Doc</h1>
+    <h1>Invite an ID Specialist</h1>
     <p>
-      Want an infectious diseases professional to speak with your team, trainees, or community group?
-      Share your details below and IDSW will help connect you with an appropriate speaker.
+      Request an infectious diseases specialist for a community-facing educational talk, training, or outreach event.
     </p>
+  </section>
+
+  <section class="section-card" style="margin-bottom: 18px;">
+    <h2>Community Outreach and Education Only</h2>
+    <p>
+      This request pathway is intended for educational and community outreach activities, such as public health talks,
+      school presentations, community learning events, and non-commercial educational sessions.
+    </p>
+    <div class="notice-box">
+      Requests submitted here are <strong>not</strong> intended for corporate partnerships, promotional activities,
+      sponsorship outreach, recruiting, sales, or other business development purposes.
+    </div>
   </section>
 
   <section class="two-col">
     <section class="section-card">
       <h2>Request a Speaker</h2>
-      <p>
-        This is a simple request form for planning purposes. Replace the “Submit Request” button with your preferred
-        workflow (email link, Google Form, or a member portal) when ready.
-      </p>
 
       <form>
         <div class="form-grid">
           <div>
             <label for="org">Organization / Group</label>
-            <input id="org" name="org" type="text" placeholder="Hospital, clinic, school, coalition…" />
+            <input id="org" name="org" type="text" placeholder="Community group, school, clinic, public health team..." />
           </div>
 
           <div>
-            <label for="contactName">Primary Contact Name</label>
+            <label for="contactName">Contact Name</label>
             <input id="contactName" name="contactName" type="text" placeholder="Full name" />
           </div>
 
@@ -151,20 +156,8 @@
           </div>
 
           <div>
-            <label for="phone">Contact Phone (optional)</label>
-            <input id="phone" name="phone" type="tel" placeholder="(555) 555-5555" />
-          </div>
-
-          <div>
-            <label for="audience">Audience Type</label>
-            <select id="audience" name="audience">
-              <option value="">Select one…</option>
-              <option>Hospital / clinic team</option>
-              <option>Residency / fellowship program</option>
-              <option>Public health / community organization</option>
-              <option>School / faith community</option>
-              <option>Other</option>
-            </select>
+            <label for="topic">Topic</label>
+            <input id="topic" name="topic" type="text" placeholder="Vaccines, antibiotic stewardship, travel health..." />
           </div>
 
           <div>
@@ -177,31 +170,17 @@
             </select>
           </div>
 
-          <div class="span-2">
-            <label for="topic">Topic / Question Area</label>
-            <input id="topic" name="topic" type="text" placeholder="Vaccines, stewardship, travel medicine, outbreak preparedness…" />
+          <div>
+            <label for="timing">Preferred Timing</label>
+            <input id="timing" name="timing" type="text" placeholder="Example: May 2026 or weekday afternoons" />
           </div>
 
           <div>
-            <label for="date1">Preferred Date (option 1)</label>
-            <input id="date1" name="date1" type="date" />
-          </div>
-
-          <div>
-            <label for="date2">Preferred Date (option 2)</label>
-            <input id="date2" name="date2" type="date" />
-          </div>
-
-          <div class="span-2">
-            <label for="details">Details (goals, time length, Q&A, learner level, etc.)</label>
-            <textarea id="details" name="details" placeholder="Tell us about your audience and what you’re hoping to cover…"></textarea>
+            <label for="details">Brief Details</label>
+            <textarea id="details" name="details" placeholder="Tell us about your audience, event, and what kind of support you are seeking."></textarea>
           </div>
         </div>
 
-        <p class="note">
-          Note: This form is a mockup. If you want it to actually submit somewhere, I can convert it to a mailto link,
-          a Google Form embed/link, or a simple backend endpoint later.
-        </p>
 
         <div class="action-actions">
           <button type="button" class="btn-green">Submit Request</button>
@@ -211,61 +190,55 @@
     </section>
 
     <aside class="sidebar-card">
-      <h3>What IDSW Can Help With</h3>
-      <p>Examples of groups we often support:</p>
-      <span class="pill">Clinical teams</span>
-      <span class="pill">Trainees</span>
-      <span class="pill">Community orgs</span>
+      <h3>Common Request Types</h3>
+      <p>Examples of educational and outreach settings:</p>
+      <span class="pill">Community groups</span>
+      <span class="pill">Schools</span>
+      <span class="pill">Clinics</span>
       <span class="pill">Public health</span>
 
-      <p style="margin-top:12px;">Common topics include:</p>
+      <p style="margin-top:12px;">Common topics:</p>
       <span class="pill">Vaccines</span>
-      <span class="pill">Antibiotics</span>
-      <span class="pill">Stewardship</span>
+      <span class="pill">Antibiotic use</span>
       <span class="pill">Travel health</span>
       <span class="pill">Respiratory viruses</span>
+      <span class="pill">Prevention</span>
 
       <p style="margin-top:12px;">
-        If you need a clinician for a specific patient case, please use your local referral pathways or “Find a Specialist.”
+        For patient-specific clinical needs, please use referral or specialist directory pathways instead.
       </p>
 
-      <button class="btn-secondary" style="margin-top:10px;" onclick="location.href='specialist.html'">
+      <button class="btn-secondary" style="margin-top:10px;" onclick="location.href='IDSW practices.html'">
         Find a Specialist
       </button>
     </aside>
   </section>
 
-  <section class="section-card action-panel invite-panel">
-    <div>
-      <h2>Before You Request</h2>
-      <p>
-        To help us match you with the right speaker, please share your audience type, preferred format, topic, and at least
-        two potential dates/times.
-      </p>
-      <ul class="checklist">
-        <li>Audience size and learner level (community, students, clinicians, etc.)</li>
-        <li>Length of talk (e.g., 20 min + Q&amp;A, 60 min grand rounds)</li>
-        <li>Whether you prefer in-person or virtual</li>
-        <li>Any accessibility needs or special considerations</li>
-      </ul>
-      <p class="muted">IDSW will follow up with next steps and availability.</p>
-    </div>
-    <div class="action-actions">
-      <button class="btn-green" onclick="location.href='faq.html'">Browse FAQ</button>
-      <button class="btn-secondary" onclick="location.href='contact.html'">Contact IDSW</button>
-    </div>
-  </section>
+
 </main>
 
-<footer>
-  Infectious Diseases Society of Washington &nbsp;•&nbsp;
-  [Insert contact email] &nbsp;•&nbsp; [Insert website/footer links]
-</footer>
+
+<div id="site-footer"></div>
 
 <script>
   fetch("IDSW%20header.html")
-    .then(r => r.text())
-    .then(html => { document.getElementById("site-header").innerHTML = html; })
+    .then(r => {
+      if (!r.ok) throw new Error("Failed to load header.html");
+      return r.text();
+    })
+    .then(html => {
+      document.getElementById("site-header").innerHTML = html;
+    })
+    .catch(err => console.error(err));
+
+  fetch("IDSW%20footer.html")
+    .then(r => {
+      if (!r.ok) throw new Error("Failed to load footer.html");
+      return r.text();
+    })
+    .then(html => {
+      document.getElementById("site-footer").innerHTML = html;
+    })
     .catch(err => console.error(err));
 </script>
 
