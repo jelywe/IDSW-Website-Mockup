@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>IDSW – Member Directory</title>
+  <link rel="stylesheet" href="IDSW style.css">
+  <style>
+    /* search-filter-bar,*/
+    /* directory-list, directory-card, card-result */
+
+    .results-meta {
+      font-size: 13px;
+      color: #666;
+      margin: 10px 2px 12px;
+    }
+
+    
+
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+<main>
+  <div class="directory-header">
+    <h1>Member Directory</h1>
+    <p>Search IDSW members across Washington State for shared patients and subject-matter expertise.</p>
+  </div>
+
+
+  <!-- Search + filters -->
+  <section class="search-filter-bar">
+    <div>
+      <label for="search">Search by name, institution, or specialty</label>
+      <input id="search" type="text" placeholder="e.g., Fessler, UW, HIV, STIs">
+    </div>
+    <div>
+      <label for="region">Region</label>
+      <select id="region">
+        <option value="">All regions</option>
+        <option>Puget Sound</option>
+        <option>Eastern Washington</option>
+        <option>Southwest Washington</option>
+        <option>Northwest Washington</option>
+      </select>
+    </div>
+    <div>
+      <label for="specialty">Specialization</label>
+      <select id="specialty">
+        <option value="">All specializations</option>
+        <option>STIs & low-barrier care</option>
+        <option>Global health & vaccines</option>
+        <option>HIV epidemiology</option>
+        <option>Mycology</option>
+        <option>Global health & WASH</option>
+      </select>
+    </div>
+  </section>
+
+  <div class="results-meta">
+    Showing example members. Actual contact details and visibility will respect each member’s privacy settings.
+  </div>
+
+  <!-- Directory cards – one per row -->
+  <section class="directory-list">
+
+    <article class="directory-card">
+      <div class="member-avatar">AF</div>
+      <div class="card-result">
+        <h2>Abigail “Abby” Fessler, MD</h2>
+        <div class="title-line">Infectious Diseases Fellow – University of Washington</div>
+        <div class="specialty">Sexually transmitted infections (STIs)</div>
+      </div>
+      <div class="card-actions">
+        <button class="btn-tertiary">Request contact</button>
+      </div>
+    </article>
+
+    <article class="directory-card">
+      <div class="member-avatar">AG</div>
+      <div class="card-result">
+        <h2>Alexa Giovanatti, DO</h2>
+        <div class="title-line">Infectious Diseases Fellow – University of Washington</div>
+        <div class="specialty">Global public health and vaccines</div>
+      </div>
+      <div class="card-actions">
+        <button class="btn-tertiary">Request contact</button>
+      </div>
+    </article>
+
+    <article class="directory-card">
+      <div class="member-avatar">LG</div>
+      <div class="card-result">
+        <h2>Lyall Glait, MD</h2>
+        <div class="title-line">Infectious Diseases Fellow – University of Washington</div>
+        <div class="specialty">HIV epidemiology</div>
+      </div>
+      <div class="card-actions">
+        <button class="btn-tertiary">Request contact</button>
+      </div>
+    </article>
+
+    <article class="directory-card">
+      <div class="member-avatar">PV</div>
+      <div class="card-result">
+        <h2>Paulina Vega, MD</h2>
+        <div class="title-line">Infectious Diseases Fellow – University of Washington</div>
+        <div class="specialty">Clinical mycology</div>
+      </div>
+      <div class="card-actions">
+        <button class="btn-tertiary">Request contact</button>
+      </div>
+    </article>
+
+    <article class="directory-card">
+      <div class="member-avatar">JW</div>
+      <div class="card-result">
+        <h2>Jerrica L. Werner, MD</h2>
+        <div class="title-line">Infectious Diseases Fellow – University of Washington</div>
+        <div class="specialty">Global health and WASH</div>
+      </div>
+      <div class="card-actions">
+        <button class="btn-tertiary">Request contact</button>
+      </div>
+    </article>
+
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+  fetch("IDSW%20header.html")
+    .then(r => {
+      if (!r.ok) throw new Error("Failed to load header.html");
+      return r.text();
+    })
+    .then(html => {
+      document.getElementById("site-header").innerHTML = html;
+    })
+    .catch(err => console.error(err));
+    
+  fetch("IDSW%20footer.html")
+    .then(r => {
+      if (!r.ok) throw new Error("Failed to load footer.html");
+      return r.text();
+    })
+    .then(html => {
+      document.getElementById("site-footer").innerHTML = html;
+    })
+    .catch(err => console.error(err));
+
+</script>
+
+
+</body>
+</html>

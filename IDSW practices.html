@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>IDSW – Practice Directory</title>
+  <link rel="stylesheet" href="IDSW style.css">
+  <style>
+
+
+.results-meta {
+      font-size: 13px;
+      color: #666;
+      margin: 10px 2px 12px;
+    }
+
+    /* Top split: search left, map right */
+    .top-split {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 16px;
+      align-items: start;
+      margin-bottom: 14px;
+    }
+
+    /* Make search stacked (each control on its own line) */
+    .search-filter-bar.practice-search {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .map-panel {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 18px 18px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .map-panel h2 {
+      font-size: 18px;
+      color: var(--brand-ink);
+      margin-bottom: 10px;
+    }
+
+    .map-panel img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid rgba(0,0,0,0.08);
+      display: block;
+      background: #ffffff;
+    }
+
+    .map-note {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* Practice directory card tweaks (reuse directory-card styles from your CSS) */
+    .practice-meta {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .top-split {
+        grid-template-columns: 1fr;
+      }
+
+      .map-panel img {
+        height: 260px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main>
+    <div class="directory-header">
+      <h1> Washington Infectious Diseases Practices Directory</h1>
+      <p>Search infectious diseases practices and clinics across Washington State by region and clinical focus.</p>
+    </div>
+
+
+    <!-- Top split: Search (left) + Map (right) -->
+    <section class="top-split">
+      <!-- Search + filters (stacked) -->
+      <section class="search-filter-bar practice-search">
+        <div>
+          <label for="search">Search by practice name, health system, city, or focus</label>
+          <input id="search" type="text" placeholder="e.g., Seattle ID, UW, Tacoma, HIV, Travel">
+        </div>
+
+        <div>
+          <label for="region">Region</label>
+          <select id="region">
+            <option value="">All regions</option>
+            <option>Puget Sound</option>
+            <option>Eastern Washington</option>
+            <option>Southwest Washington</option>
+            <option>Northwest Washington</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="specialty">Clinical Focus</label>
+          <select id="specialty">
+            <option value="">All focus areas</option>
+            <option>HIV / PrEP</option>
+            <option>STIs</option>
+            <option>Travel Medicine</option>
+            <option>Mycology</option>
+            <option>Antimicrobial Stewardship</option>
+            <option>Transplant / Immunocompromised Hosts</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Map panel -->
+      <aside class="map-panel">
+        <h2>Washington State Map (Placeholder)</h2>
+        <!-- Replace this with your own map image file if you prefer -->
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Washington_in_United_States.svg/1200px-Washington_in_United_States.svg.png"
+          alt="Map of Washington State (placeholder)">
+        <div class="map-note">
+          Placeholder map image. 
+        </div>
+      </aside>
+    </section>
+
+    <div class="results-meta">
+      Showing example practices. Actual contact details and visibility can be adjusted based on directory settings.
+    </div>
+
+    <!-- Directory cards – one per row -->
+    <section class="directory-list">
+
+      <article class="directory-card">
+        <div class="member-avatar">UW</div>
+        <div class="card-result">
+          <h2>[Practice Name] – University-Affiliated ID Clinic</h2>
+          <div class="title-line">Seattle, WA • Puget Sound</div>
+          <div class="specialty">Focus: HIV / PrEP, Transplant ID, General ID</div>
+          <div class="practice-meta">Health System: [Placeholder] • Accepting referrals: Yes</div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-tertiary">View details</button>
+        </div>
+      </article>
+
+      <article class="directory-card">
+        <div class="member-avatar">SP</div>
+        <div class="card-result">
+          <h2>[Practice Name] – Community Infectious Diseases</h2>
+          <div class="title-line">Spokane, WA • Eastern Washington</div>
+          <div class="specialty">Focus: General ID, Outpatient parenteral therapy (OPAT)</div>
+          <div class="practice-meta">Health System: [Placeholder] • Accepting referrals: Yes</div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-tertiary">View details</button>
+        </div>
+      </article>
+
+      <article class="directory-card">
+        <div class="member-avatar">TC</div>
+        <div class="card-result">
+          <h2>[Practice Name] – Travel &amp; Vaccine Clinic</h2>
+          <div class="title-line">Tacoma, WA • Puget Sound</div>
+          <div class="specialty">Focus: Travel Medicine, Vaccines, Pre-travel counseling</div>
+          <div class="practice-meta">Appointments: New patients welcome • Languages: [Placeholder]</div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-tertiary">View details</button>
+        </div>
+      </article>
+
+      <article class="directory-card">
+        <div class="member-avatar">VK</div>
+        <div class="card-result">
+          <h2>[Practice Name] – Mycology &amp; Complex Infections</h2>
+          <div class="title-line">Vancouver, WA • Southwest Washington</div>
+          <div class="specialty">Focus: Mycology, Immunocompromised hosts, OPAT</div>
+          <div class="practice-meta">Telehealth: Available • Accepting referrals: Limited</div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-tertiary">View details</button>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+<div id="site-footer"></div>
+
+<script>
+  fetch("IDSW%20header.html")
+    .then(r => {
+      if (!r.ok) throw new Error("Failed to load header.html");
+      return r.text();
+    })
+    .then(html => {
+      document.getElementById("site-header").innerHTML = html;
+    })
+    .catch(err => console.error(err));
+    
+  fetch("IDSW%20footer.html")
+    .then(r => {
+      if (!r.ok) throw new Error("Failed to load footer.html");
+      return r.text();
+    })
+    .then(html => {
+      document.getElementById("site-footer").innerHTML = html;
+    })
+    .catch(err => console.error(err));
+
+</script>
+
+
+</body>
+</html>

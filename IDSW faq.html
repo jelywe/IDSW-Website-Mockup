@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>FAQ – Ask the Expert – IDSW</title>
+  <link rel="stylesheet" href="IDSW style.css">
+  <style>
+  .faq-filter-bar {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 18px 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+    margin-bottom: 16px;
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 12px 16px;
+    align-items: end;
+  }
+  
+  .faq-filter-bar label {
+    font-size: 13px;
+    margin-bottom: 6px;
+    display: block;
+    font-weight: 600;
+    color: var(--brand-ink);
+  }
+  
+  .faq-filter-bar input {
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    padding: 10px 12px;
+    font-size: 14px;
+    width: 100%;
+    background: #fafafa;
+    outline: none;
+  }
+  
+  .faq-filter-bar input:focus{
+    border-color: var(--brand);
+    box-shadow: 0 0 0 3px rgba(0,104,48,0.12);
+    background: #ffffff;
+  }
+  
+  /* Tag pills (clickable) */
+  .faq-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .faq-tag-pill {
+    border: 1px solid rgba(0,0,0,0.10);
+    background: #ffffff;
+    color: var(--brand-ink);
+    border-radius: 999px;
+    padding: 8px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .faq-tag-pill:hover { background: var(--tag-bg); }
+  
+  .faq-tag-pill.active {
+    background: var(--brand);
+    color: #ffffff;
+    border-color: var(--brand);
+  }
+  
+  /* Horizontal expandable panels */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  details.faq-panel {
+    background: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+    border: 1px solid rgba(0,0,0,0.06);
+    overflow: hidden;
+  }
+  
+  details.faq-panel > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+  }
+  
+  details.faq-panel > summary::-webkit-details-marker { display: none; }
+  
+  .faq-q {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+  }
+  
+  .faq-q-title {
+    font-size: 16px;
+    font-weight: 750;
+    color: var(--brand-ink);
+    line-height: 1.25;
+  }
+  
+  .faq-q-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .faq-q-tag {
+    display: inline-block;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--tag-bg);
+    color: var(--brand);
+    font-weight: 650;
+  }
+  
+  .faq-chev {
+    flex: 0 0 auto;
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.04);
+    color: var(--brand-ink);
+    font-size: 16px;
+    font-weight: 800;
+    transition: transform 120ms ease;
+  }
+  
+  details[open] .faq-chev { transform: rotate(180deg); }
+  
+  .faq-body {
+    padding: 0 18px 18px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+  
+  /* Answer sections */
+  .faq-answer {
+    margin-top: 14px;
+    padding: 14px 14px;
+    border-radius: 14px;
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  
+  .faq-answer h3 {
+    margin: 0 0 8px;
+    font-size: 15px;
+    color: var(--brand-ink);
+  }
+  
+  .faq-answer p,
+  .faq-answer li {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  
+  .faq-answer ul { margin: 8px 0 0 18px; }
+  
+  /* References area */
+  .faq-refs {
+    margin-top: 14px;
+    padding: 14px 14px;
+    border-radius: 14px;
+    background: #ffffff;
+    border: 1px dashed rgba(0,0,0,0.18);
+  }
+  
+  .faq-refs h3 {
+    margin: 0 0 8px;
+    font-size: 14px;
+    color: var(--brand-ink);
+  }
+  
+  .faq-refs ul { margin: 0 0 0 18px; }
+  
+  .faq-refs li {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+  
+  /* Mobile */
+  @media (max-width: 900px) {
+    .faq-filter-bar { grid-template-columns: 1fr; }
+    details.faq-panel > summary { padding: 14px; }
+    .faq-body { padding: 0 14px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <section class="page-hero">
+    <h1>FAQ: Ask the Expert</h1>
+    <p>
+      Common questions infectious diseases physicians hear from the public—especially around vaccines, infections,
+      antibiotics, and prevention. Use search and tags to find answers quickly.
+    </p>
+  </section>
+
+  <section class="faq-filter-bar" aria-label="FAQ filters">
+    <div>
+      <label for="faqSearch">Search</label>
+      <input id="faqSearch" type="search" placeholder="Search (e.g., vaccine, booster, antibiotics, travel)..." />
+    </div>
+
+    <div>
+      <label>Actions</label>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <button class="btn-green" id="clearBtn" type="button">Clear</button>
+        <button class="btn-secondary" id="collapseBtn" type="button">Collapse All</button>
+      </div>
+    </div>
+
+    <div style="grid-column: 1 / -1;">
+      <div class="faq-tags" id="tagBar" aria-label="Tag filters">
+        <span class="faq-tag-pill" data-tag="vaccines">Vaccines</span>
+        <span class="faq-tag-pill" data-tag="covid-19">COVID-19</span>
+        <span class="faq-tag-pill" data-tag="flu">Flu</span>
+        <span class="faq-tag-pill" data-tag="antibiotics">Antibiotics</span>
+        <span class="faq-tag-pill" data-tag="kids">Kids</span>
+        <span class="faq-tag-pill" data-tag="pregnancy">Pregnancy</span>
+        <span class="faq-tag-pill" data-tag="travel">Travel</span>
+        <span class="faq-tag-pill" data-tag="testing">Testing</span>
+        <span class="faq-tag-pill" data-tag="prevention">Prevention</span>
+      </div>
+      <div class="muted" id="resultsMeta" style="margin-top:8px;">Showing all questions</div>
+    </div>
+  </section>
+
+  <section class="faq-list" id="faqList">
+    <!-- FAQ item -->
+    <details class="faq-panel" data-tags="vaccines,covid-19,prevention">
+      <summary>
+        <div class="faq-q">
+          <div class="faq-q-title">Are vaccines safe? I’m worried about side effects.</div>
+          <div class="faq-q-tags">
+            <span class="faq-q-tag">Vaccines</span>
+            <span class="faq-q-tag">COVID-19</span>
+            <span class="faq-q-tag">Prevention</span>
+          </div>
+        </div>
+        <div class="faq-chev">⌄</div>
+      </summary>
+
+      <div class="faq-body">
+        <div class="faq-answer">
+          <h3>The simple answer</h3>
+          <p>For most people, yes—vaccines are very safe. Most side effects are mild and short-lived.</p>
+        </div>
+
+        <div class="faq-answer">
+          <h3>The complicated answer</h3>
+          <p>
+            All vaccines can cause side effects, but serious reactions are rare. Safety is evaluated before approval and
+            monitored afterward. Your personal risk depends on factors like age, health conditions, and vaccine type.
+          </p>
+          <ul>
+            <li>Mild symptoms can be a sign your immune system is responding.</li>
+            <li>Clinics are prepared to treat allergic reactions on-site.</li>
+          </ul>
+        </div>
+
+        <div class="faq-answer">
+          <h3>The expert answer</h3>
+          <p>
+            When weighing risk, compare the very small chance of serious vaccine adverse events with the much higher
+            risk of complications from the infection the vaccine prevents. If you have a history of severe allergic
+            reactions, immunocompromise, or specific concerns, talk with your clinician for individualized guidance.
+          </p>
+        </div>
+
+        <div class="faq-refs">
+          <h3>References</h3>
+          <ul>
+            <li>[Add CDC vaccine safety link]</li>
+            <li>[Add ACIP/clinical guidance link]</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+    <details class="faq-panel" data-tags="antibiotics,prevention">
+      <summary>
+        <div class="faq-q">
+          <div class="faq-q-title">Why can’t I get antibiotics for a cold?</div>
+          <div class="faq-q-tags">
+            <span class="faq-q-tag">Antibiotics</span>
+            <span class="faq-q-tag">Prevention</span>
+          </div>
+        </div>
+        <div class="faq-chev">⌄</div>
+      </summary>
+
+      <div class="faq-body">
+        <div class="faq-answer">
+          <h3>The simple answer</h3>
+          <p>Colds are caused by viruses, and antibiotics only treat bacterial infections.</p>
+        </div>
+
+        <div class="faq-answer">
+          <h3>The complicated answer</h3>
+          <p>
+            Taking antibiotics when you don’t need them can cause side effects and contributes to antibiotic resistance.
+            Sometimes symptoms feel severe but are still viral; your clinician looks for signs suggesting bacterial disease.
+          </p>
+        </div>
+
+        <div class="faq-answer">
+          <h3>The expert answer</h3>
+          <p>
+            Antibiotic stewardship aims to preserve antibiotic effectiveness while preventing harms (e.g., C. difficile,
+            drug reactions). Evidence-based criteria help determine when bacterial sinusitis, pneumonia, or strep are likely.
+          </p>
+        </div>
+
+        <div class="faq-refs">
+          <h3>References</h3>
+          <ul>
+            <li>[Add CDC antibiotic use link]</li>
+            <li>[Add stewardship guidelines link]</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+    <details class="faq-panel" data-tags="flu,prevention,kids">
+      <summary>
+        <div class="faq-q">
+          <div class="faq-q-title">Should my child get the flu shot every year?</div>
+          <div class="faq-q-tags">
+            <span class="faq-q-tag">Flu</span>
+            <span class="faq-q-tag">Prevention</span>
+            <span class="faq-q-tag">Kids</span>
+          </div>
+        </div>
+        <div class="faq-chev">⌄</div>
+      </summary>
+
+      <div class="faq-body">
+        <div class="faq-answer">
+          <h3>The simple answer</h3>
+          <p>Yes—annual flu vaccination is recommended for most children.</p>
+        </div>
+
+        <div class="faq-answer">
+          <h3>The complicated answer</h3>
+          <p>
+            Flu viruses change, and immunity can fade over time. Each season’s vaccine is updated to best match circulating strains.
+            Your child’s clinician can advise on timing and which vaccine type is appropriate.
+          </p>
+        </div>
+
+        <div class="faq-answer">
+          <h3>The expert answer</h3>
+          <p>
+            Annual vaccination reduces risk of severe disease, hospitalization, and complications. It also reduces transmission
+            within households and communities, protecting infants and high-risk relatives.
+          </p>
+        </div>
+
+        <div class="faq-refs">
+          <h3>References</h3>
+          <ul>
+            <li>[Add CDC flu vaccine guidance link]</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+  </section>
+
+  <section class="section-card" id="emptyState" style="display:none;">
+    <h2>No matches</h2>
+    <p class="muted">Try a different search term or clear filters.</p>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+  // header include
+  fetch("IDSW%20header.html")
+    .then(r => r.text())
+    .then(html => { document.getElementById("site-header").innerHTML = html; })
+    .catch(console.error);
+  fetch("IDSW%20footer.html")
+    .then(r => {
+      if (!r.ok) throw new Error("Failed to load footer.html");
+      return r.text();
+    })
+    .then(html => {
+      document.getElementById("site-footer").innerHTML = html;
+    })
+    .catch(err => console.error(err));
+
+
+  const searchInput = document.getElementById("faqSearch");
+  const clearBtn = document.getElementById("clearBtn");
+  const collapseBtn = document.getElementById("collapseBtn");
+  const tagBar = document.getElementById("tagBar");
+  const resultsMeta = document.getElementById("resultsMeta");
+  const emptyState = document.getElementById("emptyState");
+
+  const panels = Array.from(document.querySelectorAll("details.faq-panel"));
+  let activeTag = null;
+
+  function normalize(s) {
+    return (s || "").toLowerCase();
+  }
+
+  function matches(panel, q, tag) {
+    const text = normalize(panel.innerText);
+    const tags = (panel.dataset.tags || "").split(",").map(t => t.trim());
+    const qOk = !q || text.includes(q);
+    const tOk = !tag || tags.includes(tag);
+    return qOk && tOk;
+  }
+
+  function applyFilters() {
+    const q = normalize(searchInput.value).trim();
+    let shown = 0;
+
+    panels.forEach(p => {
+      const ok = matches(p, q, activeTag);
+      p.style.display = ok ? "" : "none";
+      if (ok) shown++;
+    });
+
+    emptyState.style.display = shown === 0 ? "" : "none";
+
+    const tagText = activeTag ? `Tag: ${activeTag}` : "All tags";
+    const qText = q ? `Search: "${q}"` : "No search";
+    resultsMeta.textContent = `Showing ${shown} question(s) • ${tagText} • ${qText}`;
+  }
+
+  tagBar.addEventListener("click", (e) => {
+    const pill = e.target.closest(".faq-tag-pill");
+    if (!pill) return;
+
+    const tag = pill.dataset.tag;
+
+    // toggle
+    if (activeTag === tag) {
+      activeTag = null;
+    } else {
+      activeTag = tag;
+    }
+
+    // update UI
+    document.querySelectorAll(".faq-tag-pill").forEach(el => {
+      el.classList.toggle("active", el.dataset.tag === activeTag);
+    });
+
+    applyFilters();
+  });
+
+  searchInput.addEventListener("input", applyFilters);
+
+  clearBtn.addEventListener("click", () => {
+    searchInput.value = "";
+    activeTag = null;
+    document.querySelectorAll(".faq-tag-pill").forEach(el => el.classList.remove("active"));
+    applyFilters();
+  });
+
+  collapseBtn.addEventListener("click", () => {
+    panels.forEach(p => p.removeAttribute("open"));
+  });
+
+  applyFilters();
+</script>
+
+</body>
+</html>

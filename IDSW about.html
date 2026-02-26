@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>About – IDSW</title>
+  <link rel="stylesheet" href="IDSW style.css">
+  <link rel="stylesheet" href="IDSW link section style.css">
+  <style>
+
+    /* Top intro card */
+    /* .page-hero */
+    /* .section-card */
+
+    /* Mission section */
+
+    .mission-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 22px;
+      align-items: start;
+      margin-top: 10px;
+    }
+
+    .mission-text p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .mission-text ul {
+      margin: 10px 0 0 18px;
+      line-height: 1.6;
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    .mission-media {
+      border-radius: 14px;
+      overflow: hidden;
+      background: #eef4ef;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .mission-media img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .media-caption {
+      padding: 10px 12px;
+      font-size: 12px;
+      color: var(--muted);
+      background: #ffffff;
+    }
+
+  </style>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <section class="page-hero">
+    The Infectious Diseases Society of Washington is a 501c(6) organization registered in the state of Washington.
+  </section>
+
+  <section class="section-card">
+    <h1>Mission Statement</h1>
+
+    <div class="mission-grid">
+      <div class="mission-text">
+        <p>
+          IDSW brings together infectious diseases clinicians and partners across Washington State to strengthen
+          patient care, support the ID workforce, and advance evidence-based public health practice.
+        </p>
+        <p>
+          Our mission is to foster a connected community of ID professionals who collaborate on clinical excellence,
+          stewardship, education, and advocacy—so that every Washington resident has access to high-quality
+          infectious diseases expertise.
+        </p>
+        <ul>
+          <li>Connect ID professionals across the state</li>
+          <li>Promote antimicrobial stewardship and best practices</li>
+          <li>Support education, mentorship, and training</li>
+          <li>Advance policy that protects patients and communities</li>
+        </ul>
+      </div>
+
+      <div class="mission-media">
+        <img
+          src="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?auto=format&fit=crop&w=1200&q=60"
+          alt="Healthcare team meeting">
+        <div class="media-caption">Image: generic healthcare / collaboration (Unsplash)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Links  -->
+  <div id="about-links"></div>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+  fetch("IDSW%20header.html")
+    .then(r => r.text())
+    .then(html => { document.getElementById("site-header").innerHTML = html; })
+    .catch(err => console.error(err));
+  fetch("IDSW%20footer.html")
+    .then(r => r.text())
+    .then(html => { document.getElementById("site-footer").innerHTML = html; })
+    .catch(err => console.error(err));
+  
+  const HIDE_ABOUT_LINK = "aboutlink-mission"; 
+  fetch("IDSW%20about-links.html")
+    .then(r => r.text())
+    .then(html => {
+    document.getElementById("about-links").innerHTML = html;
+
+    // remove one button if requested
+    if (typeof HIDE_ABOUT_LINK !== "undefined" && HIDE_ABOUT_LINK) {
+        const btn = document.getElementById(HIDE_ABOUT_LINK);
+        if (btn) btn.remove();
+    }
+    })
+    .catch(err => console.error(err));
+</script>
+
+</body>
+</html>

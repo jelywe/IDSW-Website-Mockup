@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Committees – IDSW</title>
+
+  <link rel="stylesheet" href="IDSW style.css">
+  <link rel="stylesheet" href="IDSW link section style.css">
+
+  <style>
+    /* Main layout */
+    /* .page-hero */
+    /* .section-card */
+    /* .grid, .tile, .tag*/
+    /* .action-panel, .action-actions */
+    /* .btn-green, .btn-secondary */
+
+  </style>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <section class="page-hero">
+    <h1>IDSW Committees</h1>
+    <p>
+      Committees help IDSW turn ideas into action—supporting education, stewardship, membership engagement,
+      and advocacy across Washington State.
+    </p>
+  </section>
+
+  <section class="section-card">
+    <h2>Standing Committees</h2>
+    <p>
+      Standing committees meet throughout the year to advance core IDSW priorities.
+    </p>
+
+    <div class="grid">
+      <div class="tile">
+        <h3>Education &amp; Events</h3>
+        <p>Plans educational sessions, webinars, and member learning opportunities.</p>
+        <!--<span class="tag">Standing</span>-->
+      </div>
+
+      <div class="tile">
+        <h3>Stewardship</h3>
+        <p>Supports antimicrobial stewardship collaboration and sharing best practices statewide.</p>
+        <!--<span class="tag">Standing</span>-->
+      </div>
+
+      <div class="tile">
+        <h3>Membership &amp; Engagement</h3>
+        <p>Strengthens member experience, recruitment, mentorship, and communications.</p>
+        <!--<span class="tag">Standing</span>-->
+      </div>
+
+      <div class="tile">
+        <h3>Advocacy &amp; Policy</h3>
+        <p>Tracks priority issues and helps coordinate policy positions and member action alerts.</p>
+        <!--<span class="tag">Standing</span>-->
+      </div>
+
+      <div class="tile">
+        <h3>Equity &amp; Access</h3>
+        <p>Promotes equitable access to ID expertise and supports inclusive programs and outreach.</p>
+        <!--<span class="tag">Standing</span>-->
+      </div>
+
+      <div class="tile">
+        <h3>Communications</h3>
+        <p>Maintains web updates, newsletters, storytelling, and information sharing.</p>
+        <!--<span class="tag">Standing</span>-->
+      </div>
+    </div>
+  </section>
+
+  <section class="section-card">
+    <h2>Ad Hoc Committees</h2>
+    <p>
+      Ad hoc committees are formed for time-limited projects (e.g., a specific initiative, event, or report).
+    </p>
+
+    <div class="grid">
+      <div class="tile">
+        <h3>[Project / Initiative Name]</h3>
+        <p>Short description of the scope, timeline, and deliverable for this project.</p>
+        <!--<span class="tag">Ad Hoc</span>-->
+      </div>
+
+      <div class="tile">
+        <h3>[Project / Initiative Name]</h3>
+        <p>Short description of the scope, timeline, and deliverable for this project.</p>
+        <!--<span class="tag">Ad Hoc</span>-->
+      </div>
+
+      <div class="tile">
+        <h3>[Project / Initiative Name]</h3>
+        <p>Short description of the scope, timeline, and deliverable for this project.</p>
+        <!--<span class="tag">Ad Hoc</span>-->
+      </div>
+    </div>
+  </section>
+
+  <section class="section-card action-panel">
+    <div>
+      <h2>Join a Committee</h2>
+      <p>
+        Interested in getting involved? Tell us what you're interested in and we’ll connect you with the right group.
+      </p>
+    </div>
+    <div class="action-actions">
+      <button class="btn-green" onclick="location.href='contact.html'">Contact IDSW</button>
+      <button class="btn-secondary" onclick="location.href='membership.html'">Become a Member</button>
+    </div>
+  </section>
+
+  <!-- Shared "More About IDSW" block -->
+  <div id="about-links"></div>
+</main>
+
+<footer>
+  Infectious Diseases Society of Washington &nbsp;•&nbsp;
+  [Insert contact email] &nbsp;•&nbsp; [Insert website/footer links]
+</footer>
+
+<script>
+  fetch("IDSW%20header.html")
+    .then(r => r.text())
+    .then(html => { document.getElementById("site-header").innerHTML = html; })
+    .catch(err => console.error(err));
+
+  const HIDE_ABOUT_LINK = "aboutlink-committees";
+
+  fetch("IDSW%20about-links.html")
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById("about-links").innerHTML = html;
+      const btn = document.getElementById(HIDE_ABOUT_LINK);
+      if (btn) btn.remove();
+    })
+    .catch(err => console.error(err));
+</script>
+
+</body>
+</html>

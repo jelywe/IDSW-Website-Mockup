@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bylaws – IDSW</title>
+  <link rel="stylesheet" href="IDSW style.css">
+  <link rel="stylesheet" href="IDSW link section style.css">
+  <style>
+    /* Main layout */
+    /* .page-hero */
+    /* .section-card */
+    /* BUTTONS: .btn-green, .btn-secondary */
+    /* .muted */
+    /* Sections */
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+
+  </style>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+<!--
+  <section class="page-hero">
+    <h1>Bylaws</h1>
+    <p>
+      View or download the Infectious Diseases Society of Washington bylaws.
+    </p>
+  </section>
+-->
+  <section class="section-card">
+    <h2>IDSW Bylaws</h2>
+    <p>
+      Use the button below to open the bylaws PDF in a new tab, or download it for offline reference.
+    </p>
+
+    <div class="actions">
+      <!-- Change the href to your actual PDF filename -->
+      <a class="btn-green" href="IDSW-Bylaws.pdf" target="_blank" rel="noopener">
+        Open Bylaws (PDF)
+      </a>
+
+      <a class="btn-secondary" href="IDSW-Bylaws.pdf" download>
+        Download PDF
+      </a>
+    </div>
+
+    <p class="muted">
+      << Display IDSW Bylaws here >>
+    </p>
+
+</section>
+
+  <!-- Shared "More About IDSW" block -->
+  <div id="about-links"></div>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+    fetch("IDSW%20header.html")
+      .then(r => r.text())
+      .then(html => { document.getElementById("site-header").innerHTML = html; })
+      .catch(err => console.error(err));
+    fetch("IDSW%20footer.html")
+      .then(r => r.text())
+      .then(html => { document.getElementById("site-footer").innerHTML = html; })
+      .catch(err => console.error(err));
+
+  const HIDE_ABOUT_LINK = "aboutlink-bylaws";
+
+  fetch("IDSW%20about-links.html")
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById("about-links").innerHTML = html;
+      if (HIDE_ABOUT_LINK) {
+        const btn = document.getElementById(HIDE_ABOUT_LINK);
+        if (btn) btn.remove();
+      }
+    })
+    .catch(err => console.error(err));
+</script>
+
+</body>
+</html>

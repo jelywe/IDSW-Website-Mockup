@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Membership – IDSW</title>
+
+  <link rel="stylesheet" href="IDSW style.css">
+  <link rel="stylesheet" href="IDSW link section style.css">
+
+  <style>
+    /* .items_list */
+ 
+    .page-hero.hero-split {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    }
+
+    .page-hero .hero-left {
+    flex: 1;
+    min-width: 0;
+    }
+
+    .page-hero .hero-right {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    }
+
+    /* Mobile: stack button under text */
+    @media (max-width: 900px) {
+    .page-hero.hero-split {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .page-hero .hero-right {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    }
+
+
+  </style>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+    <section class="page-hero hero-split">
+        <div class="hero-left">
+          <h1>Membership</h1>
+          <p>
+            Join IDSW to connect with infectious diseases professionals across Washington State, support education and
+            collaboration, and strengthen the collective voice of ID in our region.
+          </p>
+        </div>
+      
+        <div class="hero-right">
+          <button class="btn-green" onclick="location.href='IDSW apply.html'">
+            Join Today!
+          </button>
+        </div>
+      </section>
+
+  <!-- Benefits at the top -->
+  <section class="section-card">
+    <h2>Benefits of Membership</h2>
+    <p>
+      IDSW membership supports a statewide professional community dedicated to clinical excellence, stewardship,
+      education, and advocacy.
+    </p>
+    <ul class="items-list">
+      <li>Connect with colleagues for shared patients, referrals, and collaboration</li>
+      <li>Access member updates, educational opportunities, and events</li>
+      <li>Contribute to policy and advocacy efforts that protect patients and communities</li>
+      <li>Share stories and learn from peers across diverse practice settings</li>
+      <li>Support stewardship, workforce development, and training pathways in Washington</li>
+    </ul>
+  </section>
+
+
+  <!-- Optional additional info (keep or delete) -->
+  <section class="section-card">
+    <h2>Questions?</h2>
+    <p>
+      For membership questions, dues, or category details, please contact <strong>[Insert membership email]</strong>.
+    </p>
+  </section>
+
+  <!-- About Links  -->
+  <div id="membership-links"></div>
+
+</main>
+
+
+<div id="site-footer"></div>
+
+<script>
+  fetch("IDSW%20header.html")
+    .then(r => r.text())
+    .then(html => { document.getElementById("site-header").innerHTML = html; })
+    .catch(err => console.error(err));
+  fetch("IDSW%20footer.html")
+    .then(r => r.text())
+    .then(html => { document.getElementById("site-footer").innerHTML = html; })
+    .catch(err => console.error(err));
+  
+  const HIDE_ABOUT_LINK = "membershiplink-benefits"; 
+  fetch("IDSW%20membership-links.html")
+    .then(r => r.text())
+    .then(html => {
+    document.getElementById("membership-links").innerHTML = html;
+
+    // remove one button if requested
+    if (typeof HIDE_ABOUT_LINK !== "undefined" && HIDE_ABOUT_LINK) {
+        const btn = document.getElementById(HIDE_ABOUT_LINK);
+        if (btn) btn.remove();
+    }
+    })
+    .catch(err => console.error(err));
+</script>
+
+</body>
+</html>

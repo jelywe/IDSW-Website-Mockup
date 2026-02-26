@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Invite an ID Doc – IDSW</title>
+
+  <link rel="stylesheet" href="IDSW style.css">
+
+  <style>
+    /* Page-specific layout additions (uses your existing main/page-hero/section-card/buttons) */
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+      align-items: start;
+      margin-bottom: 18px;
+    }
+
+    /* Reuse action-panel look, but different padding (per your pattern) */
+    .invite-panel { padding: 26px 28px 24px; }
+    .action-panel { padding: 18px 20px; } /* if not already set elsewhere */
+
+    .invite-panel .muted { margin-top: 6px; }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 16px;
+      margin-top: 10px;
+    }
+
+    .form-grid label {
+      font-size: 13px;
+      margin-bottom: 6px;
+      display: block;
+      font-weight: 600;
+      color: var(--brand-ink);
+    }
+
+    .form-grid input,
+    .form-grid select,
+    .form-grid textarea {
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      font-size: 14px;
+      width: 100%;
+      background: #fafafa;
+      outline: none;
+    }
+
+    .form-grid input:focus,
+    .form-grid select:focus,
+    .form-grid textarea:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(0,104,48,0.12);
+      background: #ffffff;
+    }
+
+    .span-2 { grid-column: 1 / -1; }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .checklist {
+      margin: 10px 0 0 18px;
+      line-height: 1.7;
+      color: var(--text);
+      font-size: 15px;
+      max-width: 900px;
+    }
+
+    .sidebar-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 18px 18px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .sidebar-card h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: var(--brand-ink);
+    }
+
+    .sidebar-card p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .pill {
+      display: inline-block;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--tag-bg);
+      color: var(--brand);
+      font-weight: 600;
+      margin: 4px 6px 0 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .two-col { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <section class="page-hero">
+    <h1>Invite an ID Doc</h1>
+    <p>
+      Want an infectious diseases professional to speak with your team, trainees, or community group?
+      Share your details below and IDSW will help connect you with an appropriate speaker.
+    </p>
+  </section>
+
+  <section class="two-col">
+    <section class="section-card">
+      <h2>Request a Speaker</h2>
+      <p>
+        This is a simple request form for planning purposes. Replace the “Submit Request” button with your preferred
+        workflow (email link, Google Form, or a member portal) when ready.
+      </p>
+
+      <form>
+        <div class="form-grid">
+          <div>
+            <label for="org">Organization / Group</label>
+            <input id="org" name="org" type="text" placeholder="Hospital, clinic, school, coalition…" />
+          </div>
+
+          <div>
+            <label for="contactName">Primary Contact Name</label>
+            <input id="contactName" name="contactName" type="text" placeholder="Full name" />
+          </div>
+
+          <div>
+            <label for="email">Contact Email</label>
+            <input id="email" name="email" type="email" placeholder="name@example.com" />
+          </div>
+
+          <div>
+            <label for="phone">Contact Phone (optional)</label>
+            <input id="phone" name="phone" type="tel" placeholder="(555) 555-5555" />
+          </div>
+
+          <div>
+            <label for="audience">Audience Type</label>
+            <select id="audience" name="audience">
+              <option value="">Select one…</option>
+              <option>Hospital / clinic team</option>
+              <option>Residency / fellowship program</option>
+              <option>Public health / community organization</option>
+              <option>School / faith community</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="format">Format</label>
+            <select id="format" name="format">
+              <option value="">Select one…</option>
+              <option>In-person</option>
+              <option>Virtual</option>
+              <option>Either works</option>
+            </select>
+          </div>
+
+          <div class="span-2">
+            <label for="topic">Topic / Question Area</label>
+            <input id="topic" name="topic" type="text" placeholder="Vaccines, stewardship, travel medicine, outbreak preparedness…" />
+          </div>
+
+          <div>
+            <label for="date1">Preferred Date (option 1)</label>
+            <input id="date1" name="date1" type="date" />
+          </div>
+
+          <div>
+            <label for="date2">Preferred Date (option 2)</label>
+            <input id="date2" name="date2" type="date" />
+          </div>
+
+          <div class="span-2">
+            <label for="details">Details (goals, time length, Q&A, learner level, etc.)</label>
+            <textarea id="details" name="details" placeholder="Tell us about your audience and what you’re hoping to cover…"></textarea>
+          </div>
+        </div>
+
+        <p class="note">
+          Note: This form is a mockup. If you want it to actually submit somewhere, I can convert it to a mailto link,
+          a Google Form embed/link, or a simple backend endpoint later.
+        </p>
+
+        <div class="action-actions">
+          <button type="button" class="btn-green">Submit Request</button>
+          <button type="reset" class="btn-secondary">Clear</button>
+        </div>
+      </form>
+    </section>
+
+    <aside class="sidebar-card">
+      <h3>What IDSW Can Help With</h3>
+      <p>Examples of groups we often support:</p>
+      <span class="pill">Clinical teams</span>
+      <span class="pill">Trainees</span>
+      <span class="pill">Community orgs</span>
+      <span class="pill">Public health</span>
+
+      <p style="margin-top:12px;">Common topics include:</p>
+      <span class="pill">Vaccines</span>
+      <span class="pill">Antibiotics</span>
+      <span class="pill">Stewardship</span>
+      <span class="pill">Travel health</span>
+      <span class="pill">Respiratory viruses</span>
+
+      <p style="margin-top:12px;">
+        If you need a clinician for a specific patient case, please use your local referral pathways or “Find a Specialist.”
+      </p>
+
+      <button class="btn-secondary" style="margin-top:10px;" onclick="location.href='specialist.html'">
+        Find a Specialist
+      </button>
+    </aside>
+  </section>
+
+  <section class="section-card action-panel invite-panel">
+    <div>
+      <h2>Before You Request</h2>
+      <p>
+        To help us match you with the right speaker, please share your audience type, preferred format, topic, and at least
+        two potential dates/times.
+      </p>
+      <ul class="checklist">
+        <li>Audience size and learner level (community, students, clinicians, etc.)</li>
+        <li>Length of talk (e.g., 20 min + Q&amp;A, 60 min grand rounds)</li>
+        <li>Whether you prefer in-person or virtual</li>
+        <li>Any accessibility needs or special considerations</li>
+      </ul>
+      <p class="muted">IDSW will follow up with next steps and availability.</p>
+    </div>
+    <div class="action-actions">
+      <button class="btn-green" onclick="location.href='faq.html'">Browse FAQ</button>
+      <button class="btn-secondary" onclick="location.href='contact.html'">Contact IDSW</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  Infectious Diseases Society of Washington &nbsp;•&nbsp;
+  [Insert contact email] &nbsp;•&nbsp; [Insert website/footer links]
+</footer>
+
+<script>
+  fetch("IDSW%20header.html")
+    .then(r => r.text())
+    .then(html => { document.getElementById("site-header").innerHTML = html; })
+    .catch(err => console.error(err));
+</script>
+
+</body>
+</html>

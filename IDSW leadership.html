@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Leadership – IDSW</title>
+
+  <link rel="stylesheet" href="IDSW style.css">
+  <link rel="stylesheet" href="IDSW link section style.css">
+
+  <style>
+
+    /* Page header */
+    .page-hero {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 30px 30px 22px;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+
+    .page-hero h1 {
+      font-size: 30px;
+      margin-bottom: 10px;
+      color: var(--brand-ink);
+    }
+
+    .page-hero p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text);
+      max-width: 850px;
+    }
+
+    /* Section cards */
+    .section-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 26px 26px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .section-card h2 {
+      font-size: 22px;
+      margin-bottom: 6px;
+      color: var(--brand-ink);
+    }
+
+    .section-card p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 14px;
+      max-width: 900px;
+    }
+
+    /* Leadership grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .person {
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 16px;
+      padding: 18px 18px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 999px;
+      background: var(--tag-bg);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--brand);
+      letter-spacing: 0.5px;
+      flex: 0 0 auto;
+    }
+
+    .person h3 {
+      font-size: 18px;
+      margin: 0;
+      color: var(--brand-ink);
+    }
+
+    .role {
+      font-size: 13px;
+      color: var(--brand);
+      font-weight: 700;
+      margin-top: -6px;
+    }
+
+    .meta {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .pill {
+      display: inline-block;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--tag-bg);
+      color: var(--brand);
+      font-weight: 600;
+      align-self: flex-start;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--brand);
+      color: #ffffff;
+      padding: 18px 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <section class="page-hero">
+    <h1>IDSW Leadership</h1>
+    <p>
+      IDSW is led by infectious diseases professionals and partners committed to strengthening care, collaboration,
+      and advocacy across Washington State.
+    </p>
+  </section>
+
+  <section class="section-card">
+    <h2>Current IDSW Board of Directors</h2>
+    <p>
+      The IDSW Board of Directors provide strategic direction and support the day-to-day priorities of IDSW. (Replace placeholders with
+      names, credentials, and affiliations.)
+    </p>
+
+    <div class="grid">
+      <div class="person">
+        <div class="avatar">TBD</div>
+        <div>
+          <h3>[Name, MD]</h3>
+          <div class="role">President</div>
+        </div>
+        <div class="meta">[Organization / Practice]</div>
+        <span class="pill">Term: 2025–2026</span>
+      </div>
+
+      <div class="person">
+        <div class="avatar">TBD</div>
+        <div>
+          <h3>[Name, MD]</h3>
+          <div class="role">President-Elect</div>
+        </div>
+        <div class="meta">[Organization / Practice]</div>
+        <span class="pill">Term: 2025–2026</span>
+      </div>
+
+      <div class="person">
+        <div class="avatar">TBD</div>
+        <div>
+          <h3>[Name, MD]</h3>
+          <div class="role">Secretary / Treasurer</div>
+        </div>
+        <div class="meta">[Organization / Practice]</div>
+        <span class="pill">Term: 2025–2026</span>
+      </div>
+    </div>
+  </section>
+
+  <!--
+  <section class="section-card">
+    <h2>Leadership Council</h2>
+    <p>
+      The Leadership Council represents a broad set of voices across Washington and helps guide IDSW programming,
+      education, and advocacy.
+    </p>
+
+    <div class="grid">
+      <div class="person">
+        <div class="avatar">ID</div>
+        <div>
+          <h3>[Name, PharmD]</h3>
+          <div class="role">Council Member</div>
+        </div>
+        <div class="meta">[Organization / Practice]</div>
+        <span class="pill">Stewardship</span>
+      </div>
+
+      <div class="person">
+        <div class="avatar">ID</div>
+        <div>
+          <h3>[Name, MD]</h3>
+          <div class="role">Council Member</div>
+        </div>
+        <div class="meta">[Organization / Practice]</div>
+        <span class="pill">Public Health</span>
+      </div>
+
+      <div class="person">
+        <div class="avatar">ID</div>
+        <div>
+          <h3>[Name, DO]</h3>
+          <div class="role">Council Member</div>
+        </div>
+        <div class="meta">[Organization / Practice]</div>
+        <span class="pill">Education</span>
+      </div>
+    </div>
+  </section>
+-->
+  <section class="section-card">
+    <h2>Contact Leadership</h2>
+    <p>
+      For leadership-related inquiries, suggestions, or partnership opportunities, please contact:
+      <strong>[Insert leadership email]</strong>.
+    </p>
+  </section>
+
+  <!-- Shared "More About IDSW" block -->
+  <div id="about-links"></div>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+    fetch("IDSW%20header.html")
+      .then(r => r.text())
+      .then(html => { document.getElementById("site-header").innerHTML = html; })
+      .catch(err => console.error(err));
+    fetch("IDSW%20footer.html")
+      .then(r => r.text())
+      .then(html => { document.getElementById("site-footer").innerHTML = html; })
+      .catch(err => console.error(err));
+
+  const HIDE_ABOUT_LINK = "aboutlink-leadership";
+
+  fetch("IDSW%20about-links.html")
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById("about-links").innerHTML = html;
+      const btn = document.getElementById(HIDE_ABOUT_LINK);
+      if (btn) btn.remove();
+    })
+    .catch(err => console.error(err));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+.links-section {
+  margin: 10px 0 26px;
+  padding: 0; /* no background/panel */
+}
+
+.links-section h2 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: var(--brand-ink);
+}
+
+.links-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Green buttons */
+.btn-green {
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-size: 15px;
+  cursor: pointer;
+  background: var(--brand);
+  color: #ffffff;
+  border: none;
+}
+
+.btn-green:hover {
+  background: var(--brand-dark);
+}

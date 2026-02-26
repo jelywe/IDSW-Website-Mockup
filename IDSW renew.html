@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Membership Renewal – IDSW</title>
+
+  <link rel="stylesheet" href="IDSW style.css">
+  <link rel="stylesheet" href="IDSW link section style.css">
+
+  <style>
+    /* Page-specific additions only (reuse your existing .page-hero, .section-card, .btn-green, etc.) */
+
+
+  </style>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <section class="page-hero">
+    <h1>Membership Renewal</h1>
+    <p>
+
+    </p>
+  </section>
+
+  
+  <!-- 
+  <section class="section-card">
+  </section>
+  -->
+
+  <!-- About Links  -->
+  <div id="membership-links"></div>
+
+</main>
+
+
+<div id="site-footer"></div>
+
+<script>
+  fetch("IDSW%20header.html")
+    .then(r => r.text())
+    .then(html => { document.getElementById("site-header").innerHTML = html; })
+    .catch(err => console.error(err));
+  fetch("IDSW%20footer.html")
+    .then(r => r.text())
+    .then(html => { document.getElementById("site-footer").innerHTML = html; })
+    .catch(err => console.error(err));
+  
+  const HIDE_ABOUT_LINK = "membershiplink-renew"; 
+  fetch("IDSW%20membership-links.html")
+    .then(r => r.text())
+    .then(html => {
+    document.getElementById("membership-links").innerHTML = html;
+
+    // remove one button if requested
+    if (typeof HIDE_ABOUT_LINK !== "undefined" && HIDE_ABOUT_LINK) {
+        const btn = document.getElementById(HIDE_ABOUT_LINK);
+        if (btn) btn.remove();
+    }
+    })
+    .catch(err => console.error(err));
+</script>
+
+</body>
+</html>
