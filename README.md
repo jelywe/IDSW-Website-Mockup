@@ -11,3 +11,4 @@
    - Type: python3 -m http.server 8000
 6. In any browser you want (Safari, Chrome) open link: http://localhost:8000/IDSW%20Home%20Page.html
 
+If you want to see updated code, then you need to re-download the repository and save it OVER the old folder (as in exact place, exact name) so that you don't have to reset up the local host.
