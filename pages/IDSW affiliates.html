@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Affiliates & Sponsors – IDSW</title>
+
+  <link rel="stylesheet" href="../css/IDSW style.css">
+  <link rel="stylesheet" href="../css/IDSW link section style.css">
+
+  <style>
+    /* Page header */
+    .page-hero {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 30px 30px 22px;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+
+    .page-hero h1 {
+      font-size: 30px;
+      margin-bottom: 10px;
+      color: var(--brand-ink);
+    }
+
+    .page-hero p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text);
+      max-width: 850px;
+    }
+
+    /* Section cards */
+    .section-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 26px 26px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .section-card h2 {
+      font-size: 22px;
+      margin-bottom: 6px;
+      color: var(--brand-ink);
+    }
+
+    .section-card > p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 14px;
+      max-width: 900px;
+    }
+
+    /* Affiliate/sponsor grid */
+    .affiliate-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .affiliate-card {
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 16px;
+      background: #ffffff;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .affiliate-image-wrap {
+      height: 145px;
+      padding: 22px;
+      background: #f4f6f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .affiliate-image {
+      max-width: 100%;
+      max-height: 100px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .affiliate-card-body {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .affiliate-card h3 {
+      font-size: 18px;
+      margin: 0;
+      color: var(--brand-ink);
+      line-height: 1.35;
+    }
+
+    .affiliate-card p {
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .affiliate-link-row {
+      margin-top: auto;
+      padding-top: 8px;
+    }
+
+    .affiliate-link {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--brand);
+      text-decoration: none;
+    }
+
+    .affiliate-link:hover {
+      text-decoration: underline;
+    }
+
+    .loading-message,
+    .empty-message,
+    .error-message {
+      font-size: 15px;
+      color: var(--muted);
+      padding: 18px 0;
+    }
+
+    .error-message {
+      color: #8a2f2f;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .button-row a {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      background: var(--brand);
+      color: #ffffff;
+    }
+
+    .button-row a.secondary {
+      background: var(--tag-bg);
+      color: var(--brand);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--brand);
+      color: #ffffff;
+      padding: 18px 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1000px) {
+      .affiliate-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 700px) {
+      .affiliate-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .affiliate-image-wrap {
+        height: 155px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <section class="page-hero">
+    <h1>Affiliates & Sponsors</h1>
+    <p>
+      IDSW works with affiliate organizations, sponsors, and partners that support infectious diseases
+      education, advocacy, collaboration, and professional community across Washington State.
+    </p>
+  </section>
+
+  <section class="section-card">
+    <h2>Affiliates</h2>
+    <p>
+      Affiliate organizations help connect IDSW with broader infectious diseases, public health,
+      and professional networks.
+    </p>
+
+    <div id="affiliates-grid" class="affiliate-grid">
+      <div class="loading-message">Loading affiliates…</div>
+    </div>
+  </section>
+
+  <section class="section-card">
+    <h2>Sponsors</h2>
+    <p>
+      Sponsors provide support for IDSW programming, events, member services, or special initiatives.
+    </p>
+
+    <div id="sponsors-grid" class="affiliate-grid">
+      <div class="loading-message">Loading sponsors…</div>
+    </div>
+  </section>
+
+  <section class="section-card">
+    <h2>Partners</h2>
+    <p>
+      Partner organizations collaborate with IDSW on shared educational, clinical, public health,
+      or advocacy priorities.
+    </p>
+
+    <div id="partners-grid" class="affiliate-grid">
+      <div class="loading-message">Loading partners…</div>
+    </div>
+  </section>
+
+  <section class="section-card">
+    <h2>Interested in Sponsoring or Partnering with IDSW?</h2>
+    <p>
+      Organizations interested in supporting IDSW programs, events, or member services are encouraged
+      to contact IDSW leadership.
+    </p>
+
+    <div class="button-row">
+      <a href="IDSW contact.html">Contact IDSW</a>
+      <a class="secondary" href="IDSW membership.html">Membership Information</a>
+    </div>
+  </section>
+
+  <!-- Shared "More About IDSW" block -->
+  <div id="about-links"></div>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+  /*
+    Default affiliate/sponsor image
+
+    If a row in Data/affiliates-sponsors.csv has a blank image field,
+    this default image will be used automatically.
+
+    Create this file:
+    ../Images/Affiliates/default-affiliate.png
+  */
+  const DEFAULT_AFFILIATE_IMAGE = "../Images/Affiliates/default-affiliate.png";
+
+  /* Shared header */
+  fetch("../includes/IDSW%20header.html")
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById("site-header").innerHTML = html;
+    })
+    .catch(err => console.error(err));
+
+  /* Shared footer */
+  fetch("../includes/IDSW%20footer.html")
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById("site-footer").innerHTML = html;
+    })
+    .catch(err => console.error(err));
+
+  /* Shared About links */
+  const HIDE_ABOUT_LINK = "aboutlink-affiliates";
+
+  fetch("../includes/IDSW%20about-links.html")
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById("about-links").innerHTML = html;
+
+      const btn = document.getElementById(HIDE_ABOUT_LINK);
+      if (btn) {
+        btn.remove();
+      }
+    })
+    .catch(err => console.error(err));
+
+  /*
+    Affiliates & Sponsors CSV loader
+
+    Editors update:
+    ../Data/affiliates-sponsors.csv
+
+    CSV columns:
+    sort_order,type,name,description,website,image,active
+
+    type should be one of:
+    Affiliate
+    Sponsor
+    Partner
+
+    image:
+    Optional image/logo path.
+    Leave blank to use the default image.
+
+    active:
+    yes = show item
+    no = hide item
+  */
+
+  function parseCSV(text) {
+    const rows = [];
+    let currentRow = [];
+    let currentValue = "";
+    let insideQuotes = false;
+
+    for (let i = 0; i < text.length; i++) {
+      const char = text[i];
+      const nextChar = text[i + 1];
+
+      if (char === '"' && insideQuotes && nextChar === '"') {
+        currentValue += '"';
+        i++;
+      } else if (char === '"') {
+        insideQuotes = !insideQuotes;
+      } else if (char === "," && !insideQuotes) {
+        currentRow.push(currentValue.trim());
+        currentValue = "";
+      } else if ((char === "\n" || char === "\r") && !insideQuotes) {
+        if (char === "\r" && nextChar === "\n") {
+          i++;
+        }
+
+        currentRow.push(currentValue.trim());
+
+        if (currentRow.some(value => value !== "")) {
+          rows.push(currentRow);
+        }
+
+        currentRow = [];
+        currentValue = "";
+      } else {
+        currentValue += char;
+      }
+    }
+
+    currentRow.push(currentValue.trim());
+
+    if (currentRow.some(value => value !== "")) {
+      rows.push(currentRow);
+    }
+
+    return rows;
+  }
+
+  function csvRowsToObjects(rows) {
+    if (!rows.length) {
+      return [];
+    }
+
+    const headers = rows[0].map(header => header.trim());
+
+    return rows.slice(1).map(row => {
+      const item = {};
+
+      headers.forEach((header, index) => {
+        item[header] = row[index] ? row[index].trim() : "";
+      });
+
+      return item;
+    });
+  }
+
+  function escapeHTML(value) {
+    return String(value || "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  function isActive(value) {
+    return String(value || "").trim().toLowerCase() !== "no";
+  }
+
+  function normalizePartnerType(value) {
+    return String(value || "")
+      .trim()
+      .toLowerCase();
+  }
+
+  function safeURL(value) {
+    const url = String(value || "").trim();
+
+    if (!url) {
+      return "";
+    }
+
+    if (
+      url.startsWith("http://") ||
+      url.startsWith("https://") ||
+      url.startsWith("mailto:")
+    ) {
+      return url;
+    }
+
+    return "";
+  }
+
+  function createAffiliateCard(item) {
+    const name = escapeHTML(item.name || "[Organization Name]");
+    const description = escapeHTML(item.description || "[Brief organization description]");
+    const website = safeURL(item.website);
+    const websiteEscaped = escapeHTML(website);
+    const rawImage = String(item.image || "").trim();
+    const image = rawImage ? rawImage : DEFAULT_AFFILIATE_IMAGE;
+
+    const linkMarkup = website
+      ? `
+        <div class="affiliate-link-row">
+          <a class="affiliate-link" href="${websiteEscaped}" target="_blank" rel="noopener noreferrer">
+            Visit website
+          </a>
+        </div>
+      `
+      : "";
+
+    return `
+      <article class="affiliate-card">
+        <div class="affiliate-image-wrap">
+          <img
+            class="affiliate-image"
+            src="${escapeHTML(image)}"
+            alt="${name}"
+            onerror="this.onerror=null; this.src='${DEFAULT_AFFILIATE_IMAGE}';"
+          >
+        </div>
+
+        <div class="affiliate-card-body">
+          <h3>${name}</h3>
+          <p>${description}</p>
+          ${linkMarkup}
+        </div>
+      </article>
+    `;
+  }
+
+  function renderPartnerSection(items, containerId, emptyMessage) {
+    const container = document.getElementById(containerId);
+
+    if (!container) {
+      return;
+    }
+
+    if (!items.length) {
+      container.className = "";
+      container.innerHTML = `<div class="empty-message">${escapeHTML(emptyMessage)}</div>`;
+      return;
+    }
+
+    container.className = "affiliate-grid";
+    container.innerHTML = items.map(createAffiliateCard).join("");
+  }
+
+  function loadAffiliatesSponsors() {
+    fetch("../Data/affiliates-sponsors.csv")
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Could not load affiliates-sponsors.csv");
+        }
+
+        return response.text();
+      })
+      .then(csvText => {
+        const rows = parseCSV(csvText);
+        const items = csvRowsToObjects(rows)
+          .filter(item => isActive(item.active))
+          .sort((a, b) => {
+            const aOrder = Number(a.sort_order || 9999);
+            const bOrder = Number(b.sort_order || 9999);
+
+            return aOrder - bOrder;
+          });
+
+        const affiliates = items.filter(
+          item => normalizePartnerType(item.type) === "affiliate"
+        );
+
+        const sponsors = items.filter(
+          item => normalizePartnerType(item.type) === "sponsor"
+        );
+
+        const partners = items.filter(
+          item => normalizePartnerType(item.type) === "partner"
+        );
+
+        renderPartnerSection(
+          affiliates,
+          "affiliates-grid",
+          "No affiliates are listed yet."
+        );
+
+        renderPartnerSection(
+          sponsors,
+          "sponsors-grid",
+          "No sponsors are listed yet."
+        );
+
+        renderPartnerSection(
+          partners,
+          "partners-grid",
+          "No partners are listed yet."
+        );
+      })
+      .catch(error => {
+        console.error(error);
+
+        const affiliatesContainer = document.getElementById("affiliates-grid");
+        const sponsorsContainer = document.getElementById("sponsors-grid");
+        const partnersContainer = document.getElementById("partners-grid");
+
+        if (affiliatesContainer) {
+          affiliatesContainer.className = "";
+          affiliatesContainer.innerHTML = `
+            <div class="error-message">
+              Affiliate and sponsor information could not be loaded. Check that Data/affiliates-sponsors.csv exists.
+            </div>
+          `;
+        }
+
+        if (sponsorsContainer) {
+          sponsorsContainer.className = "";
+          sponsorsContainer.innerHTML = "";
+        }
+
+        if (partnersContainer) {
+          partnersContainer.className = "";
+          partnersContainer.innerHTML = "";
+        }
+      });
+  }
+
+  loadAffiliatesSponsors();
+</script>
+
+</body>
+</html>

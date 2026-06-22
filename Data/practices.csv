@@ -1,0 +1,5 @@
+sort_order,avatar,name,subtitle,address,city,state,region,clinical_focus,health_system,accepting_referrals,appointments,languages,telehealth,website,active
+1,UW,[Practice Name],University-Affiliated ID Clinic,1959 NE Pacific St,Seattle,WA,Puget Sound,HIV / PrEP;Transplant ID;General ID,[Placeholder],Yes,,,,https://example.org,yes
+2,SP,[Practice Name],Community Infectious Diseases,123 Example Ave,Spokane,WA,Eastern Washington,General ID;Outpatient parenteral therapy (OPAT),[Placeholder],Yes,,,,https://example.org,yes
+3,TC,[Practice Name],Travel & Vaccine Clinic,456 Example St,Tacoma,WA,Puget Sound,Travel Medicine;Vaccines;Pre-travel counseling,,,New patients welcome,[Placeholder],,https://example.org,yes
+4,VK,[Practice Name],Mycology & Complex Infections,789 Example Blvd,Vancouver,WA,Southwest Washington,Mycology;Immunocompromised hosts;OPAT,,Limited,,,Available,https://example.org,yes

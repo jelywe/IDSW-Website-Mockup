@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Resources – IDSW</title>
+
+  <link rel="stylesheet" href="../css/IDSW style.css">
+  <link rel="stylesheet" href="../css/IDSW link section style.css">
+
+  <style>
+    /* Page header */
+    .page-hero {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 30px 30px 22px;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+
+    .page-hero h1 {
+      font-size: 30px;
+      margin-bottom: 10px;
+      color: var(--brand-ink);
+    }
+
+    .page-hero p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text);
+      max-width: 850px;
+    }
+
+    /* Resource sections */
+    .section-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .section-card h2 {
+      font-size: 22px;
+      margin-bottom: 6px;
+      color: var(--brand-ink);
+    }
+
+    .section-card > p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 16px;
+      max-width: 900px;
+    }
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .resource-card {
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 16px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 100%;
+    }
+
+    .resource-card h3 {
+      font-size: 18px;
+      line-height: 1.3;
+      color: var(--brand-ink);
+      margin: 0;
+    }
+
+    .resource-card p {
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .resource-tag {
+      display: inline-block;
+      align-self: flex-start;
+      background: var(--tag-bg);
+      color: var(--brand);
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .resource-card a {
+      margin-top: auto;
+      padding-top: 8px;
+      color: var(--brand);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .resource-card a:hover {
+      text-decoration: underline;
+    }
+
+    .notice-box {
+      background: #f4f6f4;
+      border-left: 4px solid var(--brand);
+      border-radius: 12px;
+      padding: 14px 16px;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.55;
+      margin-top: 14px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .button-row a {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      background: var(--brand);
+      color: #ffffff;
+    }
+
+    .button-row a.secondary {
+      background: var(--tag-bg);
+      color: var(--brand);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--brand);
+      color: #ffffff;
+      padding: 18px 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1000px) {
+      .resource-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 700px) {
+      .resource-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <section class="page-hero">
+    <h1>IDSW Resources</h1>
+    <p>
+      Find directories, educational resources, clinical references, member tools, and opportunities
+      to connect with infectious diseases expertise across Washington State.
+    </p>
+  </section>
+
+  <section class="section-card">
+    <h2>Directories</h2>
+    <p>
+      Search IDSW directories for infectious diseases practices, microbiology laboratories, and training programs.
+    </p>
+
+    <div class="resource-grid">
+      <article class="resource-card">
+        <span class="resource-tag">Directory</span>
+        <h3>Practice Directory</h3>
+        <p>
+          Search infectious diseases practices and clinics across Washington by region and clinical focus.
+        </p>
+        <a href="IDSW practices.html">Open Practice Directory</a>
+      </article>
+
+      <article class="resource-card">
+        <span class="resource-tag">Directory</span>
+        <h3>Microbiology Labs Directory</h3>
+        <p>
+          Find microbiology laboratories by health system, location, and available services.
+        </p>
+        <a href="IDSW micro-labs.html">Open Micro Labs Directory</a>
+      </article>
+
+      <article class="resource-card">
+        <span class="resource-tag">Directory</span>
+        <h3>Training Programs</h3>
+        <p>
+          Browse infectious diseases fellowships, rotations, and related training opportunities.
+        </p>
+        <a href="IDSW training.html">Open Training Programs</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-card">
+    <h2>Clinical and Educational Resources</h2>
+    <p>
+      Access educational materials, frequently asked questions, and opportunities to request infectious diseases expertise.
+    </p>
+
+    <div class="resource-grid">
+      <article class="resource-card">
+        <span class="resource-tag">Education</span>
+        <h3>FAQ</h3>
+        <p>
+          Review commonly requested infectious diseases information and member-facing educational content.
+        </p>
+        <a href="IDSW faq.html">Open FAQ</a>
+      </article>
+
+      <article class="resource-card">
+        <span class="resource-tag">Consultation</span>
+        <h3>Ask an Expert</h3>
+        <p>
+          Submit a general educational question or request expert input for IDSW-supported programming.
+        </p>
+        <a href="IDSW ask.html">Ask an Expert</a>
+      </article>
+
+      <article class="resource-card">
+        <span class="resource-tag">Events</span>
+        <h3>Event Recordings</h3>
+        <p>
+          Access recordings or materials from past IDSW events when available.
+        </p>
+        <a href="IDSW events-past.html">View Past Events</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-card">
+    <h2>Advocacy and Policy</h2>
+    <p>
+      Find policy statements, advocacy actions, and resources related to infectious diseases care,
+      public health, and the ID workforce.
+    </p>
+
+    <div class="resource-grid">
+      <article class="resource-card">
+        <span class="resource-tag">Advocacy</span>
+        <h3>Advocacy Resources</h3>
+        <p>
+          Review IDSW advocacy priorities, member actions, and public policy resources.
+        </p>
+        <a href="IDSW advocacy.html">Open Advocacy Page</a>
+      </article>
+
+      <article class="resource-card">
+        <span class="resource-tag">Policy</span>
+        <h3>Policy Statements</h3>
+        <p>
+          View IDSW policy statements, position letters, and related documents.
+        </p>
+        <a href="IDSW policy.html">Open Policy Page</a>
+      </article>
+
+      <article class="resource-card">
+        <span class="resource-tag">Stories</span>
+        <h3>Submit a Story</h3>
+        <p>
+          Share a story that may help IDSW communicate the value of infectious diseases care and public health work.
+        </p>
+        <a href="IDSW submit-story.html">Submit a Story</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-card">
+    <h2>Need Something Else?</h2>
+    <p>
+      Contact IDSW if you are looking for a resource that is not currently listed or would like to suggest
+      a new resource for members.
+    </p>
+
+    <div class="button-row">
+      <a href="IDSW contact.html">Contact IDSW</a>
+      <a class="secondary" href="IDSW membership.html">Membership Information</a>
+    </div>
+
+    <div class="notice-box">
+      Resource pages are part of the public mockup unless access control is added separately.
+      Do not place private member-only content or sensitive information on this page without a protected login system.
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+  /* Shared header */
+  fetch("../includes/IDSW%20header.html")
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById("site-header").innerHTML = html;
+    })
+    .catch(err => console.error(err));
+
+  /* Shared footer */
+  fetch("../includes/IDSW%20footer.html")
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById("site-footer").innerHTML = html;
+    })
+    .catch(err => console.error(err));
+</script>
+
+</body>
+</html>

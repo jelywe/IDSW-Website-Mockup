@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Membership Application – IDSW</title>
+
+  <link rel="stylesheet" href="../css/IDSW style.css">
+  <link rel="stylesheet" href="../css/IDSW link section style.css">
+
+  <style>
+    /* Page header */
+    .page-hero {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 30px 30px 22px;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+
+    .page-hero h1 {
+      font-size: 30px;
+      margin-bottom: 10px;
+      color: var(--brand-ink);
+    }
+
+    .page-hero p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text);
+      max-width: 850px;
+    }
+
+    /* Form layout */
+    .form-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .form-card h2 {
+      font-size: 22px;
+      margin-bottom: 6px;
+      color: var(--brand-ink);
+    }
+
+    .form-card > p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 16px;
+      max-width: 900px;
+    }
+
+    .form-section {
+      border-top: 1px solid rgba(0,0,0,0.08);
+      padding-top: 22px;
+      margin-top: 24px;
+    }
+
+    .form-section:first-of-type {
+      border-top: none;
+      padding-top: 0;
+      margin-top: 0;
+    }
+
+    .form-section h3 {
+      font-size: 18px;
+      color: var(--brand-ink);
+      margin-bottom: 8px;
+    }
+
+    .section-note {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 14px;
+      max-width: 850px;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .field-grid.full {
+      grid-template-columns: 1fr;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field label,
+    .choice-group legend {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--brand-ink);
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      border: 1px solid rgba(0,0,0,0.16);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 15px;
+      font-family: inherit;
+      color: var(--text);
+      background: #ffffff;
+    }
+
+    .field textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .field small {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .choice-group {
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .choice-grid.three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .choice-card {
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 14px;
+      padding: 14px;
+      background: #ffffff;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .choice-card input {
+      margin-top: 3px;
+      flex: 0 0 auto;
+    }
+
+    .choice-card span {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .choice-card strong {
+      color: var(--brand-ink);
+      font-size: 15px;
+      line-height: 1.3;
+    }
+
+    .choice-card small {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .notice-box {
+      background: #f4f6f4;
+      border-left: 4px solid var(--brand);
+      border-radius: 12px;
+      padding: 14px 16px;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.55;
+      margin-top: 14px;
+    }
+
+    .submit-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .submit-row button {
+      border: none;
+      border-radius: 999px;
+      padding: 12px 18px;
+      background: var(--brand);
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .submit-row button:hover {
+      opacity: 0.92;
+    }
+
+    .submit-note {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.45;
+      max-width: 620px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .button-row a {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      background: var(--brand);
+      color: #ffffff;
+    }
+
+    .button-row a.secondary {
+      background: var(--tag-bg);
+      color: var(--brand);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--brand);
+      color: #ffffff;
+      padding: 18px 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .field-grid,
+      .choice-grid,
+      .choice-grid.three {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <section class="page-hero">
+    <h1>Membership Application</h1>
+    <p>
+      Apply to join IDSW as part of a statewide professional community committed to infectious diseases
+      education, collaboration, advocacy, and public health.
+    </p>
+  </section>
+
+  <section class="form-card">
+    <h2>Apply for IDSW Membership</h2>
+    <p>
+      Complete the information below to submit a membership application. This mockup form is not yet connected
+      to a submission system.
+    </p>
+
+    <form>
+      <section class="form-section">
+        <h3>Applicant Information</h3>
+
+        <div class="field-grid">
+          <div class="field">
+            <label for="first-name">First Name</label>
+            <input id="first-name" name="first_name" type="text" autocomplete="given-name">
+          </div>
+
+          <div class="field">
+            <label for="last-name">Last Name</label>
+            <input id="last-name" name="last_name" type="text" autocomplete="family-name">
+          </div>
+
+          <div class="field">
+            <label for="credentials">Credentials</label>
+            <input id="credentials" name="credentials" type="text" placeholder="MD, DO, PharmD, PhD, MPH, PA-C, ARNP, etc.">
+          </div>
+
+          <div class="field">
+            <label for="email">Email Address</label>
+            <input id="email" name="email" type="email" autocomplete="email">
+          </div>
+
+          <div class="field">
+            <label for="phone">Phone Number</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel">
+          </div>
+
+          <div class="field">
+            <label for="city-state">City / State</label>
+            <input id="city-state" name="city_state" type="text" placeholder="Seattle, WA">
+          </div>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h3>Professional Information</h3>
+
+        <div class="field-grid">
+          <div class="field">
+            <label for="organization">Organization / Institution</label>
+            <input id="organization" name="organization" type="text">
+          </div>
+
+          <div class="field">
+            <label for="job-title">Professional Title / Role</label>
+            <input id="job-title" name="job_title" type="text">
+          </div>
+
+          <div class="field">
+            <label for="department">Department / Division</label>
+            <input id="department" name="department" type="text">
+          </div>
+
+          <div class="field">
+            <label for="practice-setting">Primary Practice or Work Setting</label>
+            <select id="practice-setting" name="practice_setting">
+              <option value="">Select one</option>
+              <option value="academic">Academic Medical Center</option>
+              <option value="community_hospital">Community Hospital / Health System</option>
+              <option value="clinic">Outpatient Clinic</option>
+              <option value="public_health">Public Health Agency</option>
+              <option value="laboratory">Laboratory / Diagnostics</option>
+              <option value="research">Research Institution</option>
+              <option value="industry">Industry</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h3>Membership Category</h3>
+        <p class="section-note">
+          Select the category that best describes your primary professional role.
+        </p>
+
+        <fieldset class="choice-group">
+          <legend>Membership Category</legend>
+
+          <div class="choice-grid">
+            <label class="choice-card">
+              <input type="radio" name="membership_category" value="physician">
+              <span>
+                <strong>Physician</strong>
+                <small>For physicians practicing or interested in infectious diseases.</small>
+              </span>
+            </label>
+
+            <label class="choice-card">
+              <input type="radio" name="membership_category" value="advanced_practice_provider">
+              <span>
+                <strong>Advanced Practice Provider</strong>
+                <small>For nurse practitioners, physician assistants, and other advanced practice clinicians.</small>
+              </span>
+            </label>
+
+            <label class="choice-card">
+              <input type="radio" name="membership_category" value="pharmacist">
+              <span>
+                <strong>Pharmacist</strong>
+                <small>For pharmacists with infectious diseases, antimicrobial stewardship, or related interests.</small>
+              </span>
+            </label>
+
+            <label class="choice-card">
+              <input type="radio" name="membership_category" value="researcher_scientist">
+              <span>
+                <strong>Researcher / Scientist</strong>
+                <small>For researchers, scientists, and laboratory professionals working in infectious diseases or related fields.</small>
+              </span>
+            </label>
+
+            <label class="choice-card">
+              <input type="radio" name="membership_category" value="public_health">
+              <span>
+                <strong>Public Health</strong>
+                <small>For public health professionals working in infectious diseases, epidemiology, prevention, or response.</small>
+              </span>
+            </label>
+          </div>
+        </fieldset>
+      </section>
+
+      <section class="form-section">
+        <h3>Trainee Status</h3>
+        <p class="section-note">
+          Indicate whether you are currently a student, resident, fellow, or other trainee.
+        </p>
+
+        <fieldset class="choice-group">
+          <legend>Are you currently a trainee?</legend>
+
+          <div class="choice-grid">
+            <label class="choice-card">
+              <input type="radio" name="trainee_status" value="yes">
+              <span>
+                <strong>Yes</strong>
+                <small>I am currently a student, resident, fellow, or other trainee.</small>
+              </span>
+            </label>
+
+            <label class="choice-card">
+              <input type="radio" name="trainee_status" value="no">
+              <span>
+                <strong>No</strong>
+                <small>I am not currently a trainee.</small>
+              </span>
+            </label>
+          </div>
+        </fieldset>
+      </section>
+
+      <section class="form-section">
+        <h3>Areas of Interest</h3>
+        <p class="section-note">
+          Select any areas where you would like to receive updates or become involved.
+        </p>
+
+        <div class="choice-grid">
+          <label class="choice-card">
+            <input type="checkbox" name="interests" value="education_events">
+            <span>
+              <strong>Education & Events</strong>
+              <small>Meetings, webinars, journal clubs, and educational programming.</small>
+            </span>
+          </label>
+
+          <label class="choice-card">
+            <input type="checkbox" name="interests" value="advocacy_policy">
+            <span>
+              <strong>Advocacy & Policy</strong>
+              <small>Policy priorities, legislative updates, and calls to action.</small>
+            </span>
+          </label>
+
+          <label class="choice-card">
+            <input type="checkbox" name="interests" value="clinical_resources">
+            <span>
+              <strong>Clinical Resources</strong>
+              <small>Practice tools, resource sharing, and clinical collaboration.</small>
+            </span>
+          </label>
+
+          <label class="choice-card">
+            <input type="checkbox" name="interests" value="public_health">
+            <span>
+              <strong>Public Health</strong>
+              <small>Surveillance, outbreak response, prevention, and public health partnerships.</small>
+            </span>
+          </label>
+
+          <label class="choice-card">
+            <input type="checkbox" name="interests" value="research">
+            <span>
+              <strong>Research</strong>
+              <small>Research collaboration, trials, abstracts, and scholarly activity.</small>
+            </span>
+          </label>
+
+          <label class="choice-card">
+            <input type="checkbox" name="interests" value="committees">
+            <span>
+              <strong>Committee Service</strong>
+              <small>Opportunities to support IDSW committees or special initiatives.</small>
+            </span>
+          </label>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h3>Communication Preferences</h3>
+
+        <fieldset class="choice-group">
+          <legend>Email Preferences</legend>
+
+          <div class="choice-grid">
+            <label class="choice-card">
+              <input type="checkbox" name="communications" value="newsletter">
+              <span>
+                <strong>Newsletter and Society Updates</strong>
+                <small>Receive general IDSW news, announcements, and member updates.</small>
+              </span>
+            </label>
+
+            <label class="choice-card">
+              <input type="checkbox" name="communications" value="events">
+              <span>
+                <strong>Event Announcements</strong>
+                <small>Receive updates about IDSW meetings, webinars, and educational events.</small>
+              </span>
+            </label>
+
+            <label class="choice-card">
+              <input type="checkbox" name="communications" value="advocacy">
+              <span>
+                <strong>Advocacy Alerts</strong>
+                <small>Receive policy updates and advocacy-related calls to action.</small>
+              </span>
+            </label>
+
+            <label class="choice-card">
+              <input type="checkbox" name="communications" value="opportunities">
+              <span>
+                <strong>Opportunities</strong>
+                <small>Receive information about committee service, collaboration, and professional opportunities.</small>
+              </span>
+            </label>
+          </div>
+        </fieldset>
+      </section>
+
+      <section class="form-section">
+        <h3>Additional Information</h3>
+
+        <div class="field-grid full">
+          <div class="field">
+            <label for="additional-info">Anything else you would like IDSW to know?</label>
+            <textarea id="additional-info" name="additional_info" placeholder="Optional"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h3>Attestation</h3>
+
+        <fieldset class="choice-group">
+          <legend>Applicant Confirmation</legend>
+
+          <div class="choice-grid full">
+            <label class="choice-card">
+              <input type="checkbox" name="attestation" value="confirmed">
+              <span>
+                <strong>I confirm that the information provided in this application is accurate to the best of my knowledge.</strong>
+                <small>I understand that IDSW may contact me regarding this application and membership-related matters.</small>
+              </span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="notice-box">
+          This form is a website mockup and is not yet connected to a live submission system.
+        </div>
+      </section>
+
+      <div class="submit-row">
+        <button type="button">Submit Application</button>
+        <div class="submit-note">
+          In the final website, this button should submit the application to the selected membership management
+          system, form service, or administrative contact.
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <section class="form-card">
+    <h2>What Happens Next?</h2>
+    <p>
+      After submission, IDSW will review the application and follow up with membership status,
+      dues information, and next steps for accessing member resources.
+    </p>
+
+    <div class="button-row">
+      <a href="IDSW membership.html">Back to Membership</a>
+      <a class="secondary" href="IDSW contact.html">Contact IDSW</a>
+    </div>
+  </section>
+
+  <!-- Shared membership links block -->
+  <div id="membership-links"></div>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+  /* Shared header */
+  fetch("../includes/IDSW%20header.html")
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById("site-header").innerHTML = html;
+    })
+    .catch(err => console.error(err));
+
+  /* Shared footer */
+  fetch("../includes/IDSW%20footer.html")
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById("site-footer").innerHTML = html;
+    })
+    .catch(err => console.error(err));
+
+  /* Shared membership links */
+  const HIDE_MEMBERSHIP_LINK = "membershiplink-apply";
+
+  fetch("../includes/IDSW%20membership-links.html")
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById("membership-links").innerHTML = html;
+
+      const btn = document.getElementById(HIDE_MEMBERSHIP_LINK);
+      if (btn) {
+        btn.remove();
+      }
+    })
+    .catch(err => console.error(err));
+</script>
+
+</body>
+</html>

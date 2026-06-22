@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>IDSW – Training Programs Directory</title>
+
+  <link rel="stylesheet" href="../css/IDSW style.css">
+  <link rel="stylesheet" href="../css/IDSW link section style.css">
+
+  <style>
+    .results-meta {
+      font-size: 13px;
+      color: #666;
+      margin: 10px 2px 12px;
+    }
+
+    .top-split {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 16px;
+      align-items: start;
+      margin-bottom: 14px;
+    }
+
+    .search-filter-bar.practice-search {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .map-panel {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 18px 18px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .map-panel h2 {
+      font-size: 18px;
+      color: var(--brand-ink);
+      margin-bottom: 10px;
+    }
+
+    .map-panel img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid rgba(0,0,0,0.08);
+      display: block;
+      background: #ffffff;
+    }
+
+    .map-note {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .program-type-pill {
+      display: inline-block;
+      background: var(--tag-bg);
+      color: var(--brand);
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-top: 6px;
+    }
+
+    .program-location {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.45;
+      margin-top: 8px;
+    }
+
+    .program-focus {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-top: 8px;
+    }
+
+    .program-focus strong {
+      color: var(--brand-ink);
+    }
+
+    .directory-card .card-result h2 {
+      margin-bottom: 0;
+    }
+
+    .directory-card .card-actions {
+      align-self: center;
+    }
+
+    .loading-message,
+    .empty-message,
+    .error-message {
+      font-size: 15px;
+      color: var(--muted);
+      padding: 18px 0;
+    }
+
+    .error-message {
+      color: #8a2f2f;
+    }
+
+    @media (max-width: 900px) {
+      .top-split {
+        grid-template-columns: 1fr;
+      }
+
+      .map-panel img {
+        height: 260px;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .directory-card .card-actions {
+        align-self: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="site-header"></div>
+
+  <main>
+    <div class="directory-header">
+      <h1>Washington Infectious Diseases Training Programs Directory</h1>
+      <p>Search infectious diseases training programs and related educational opportunities across Washington State.</p>
+    </div>
+
+    <section class="top-split">
+      <section class="search-filter-bar practice-search">
+        <div>
+          <label for="search">Search by program name, center, city, program type, or focus</label>
+          <input id="search" type="text" placeholder="e.g., fellowship, Seattle, stewardship, public health">
+        </div>
+
+        <div>
+          <label for="program-type">Program Type</label>
+          <select id="program-type">
+            <option value="">All program types</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="focus">Focus</label>
+          <select id="focus">
+            <option value="">All focus areas</option>
+          </select>
+        </div>
+      </section>
+
+      <aside class="map-panel">
+        <h2>Washington State Map</h2>
+        <img
+          src="../Images/Washington Map Placeholder.png"
+          alt="Map of Washington State">
+        <div class="map-note">
+          Placeholder map image.
+        </div>
+      </aside>
+    </section>
+
+    <div id="results-meta" class="results-meta">
+      Loading training programs…
+    </div>
+
+    <section id="training-results" class="directory-list">
+      <div class="loading-message">Loading training programs…</div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script>
+    let allPrograms = [];
+
+    fetch("../includes/IDSW%20header.html")
+      .then(r => {
+        if (!r.ok) throw new Error("Failed to load header.html");
+        return r.text();
+      })
+      .then(html => {
+        document.getElementById("site-header").innerHTML = html;
+      })
+      .catch(err => console.error(err));
+
+    fetch("../includes/IDSW%20footer.html")
+      .then(r => {
+        if (!r.ok) throw new Error("Failed to load footer.html");
+        return r.text();
+      })
+      .then(html => {
+        document.getElementById("site-footer").innerHTML = html;
+      })
+      .catch(err => console.error(err));
+
+    /*
+      Training Programs CSV loader
+
+      Editors update:
+      ../Data/training-programs.csv
+
+      CSV columns:
+      sort_order,avatar,program_name,program_type,city,state,center,focus,website,active
+
+      program_type:
+      This displays exactly as written in the CSV.
+      Example:
+      ID Fellowship
+      Pediatric ID Fellowship
+      Stewardship Training
+      Public Health Training
+      Clinical Microbiology Rotation
+
+      focus:
+      Separate multiple focus areas with semicolons.
+      Example:
+      Adult ID;HIV;Transplant ID;Antimicrobial Stewardship
+
+      active:
+      yes = show listing
+      no = hide listing
+    */
+
+    function parseCSV(text) {
+      const rows = [];
+      let currentRow = [];
+      let currentValue = "";
+      let insideQuotes = false;
+
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        const nextChar = text[i + 1];
+
+        if (char === '"' && insideQuotes && nextChar === '"') {
+          currentValue += '"';
+          i++;
+        } else if (char === '"') {
+          insideQuotes = !insideQuotes;
+        } else if (char === "," && !insideQuotes) {
+          currentRow.push(currentValue.trim());
+          currentValue = "";
+        } else if ((char === "\n" || char === "\r") && !insideQuotes) {
+          if (char === "\r" && nextChar === "\n") {
+            i++;
+          }
+
+          currentRow.push(currentValue.trim());
+
+          if (currentRow.some(value => value !== "")) {
+            rows.push(currentRow);
+          }
+
+          currentRow = [];
+          currentValue = "";
+        } else {
+          currentValue += char;
+        }
+      }
+
+      currentRow.push(currentValue.trim());
+
+      if (currentRow.some(value => value !== "")) {
+        rows.push(currentRow);
+      }
+
+      return rows;
+    }
+
+    function csvRowsToObjects(rows) {
+      if (!rows.length) {
+        return [];
+      }
+
+      const headers = rows[0].map(header => header.trim());
+
+      return rows.slice(1).map(row => {
+        const item = {};
+
+        headers.forEach((header, index) => {
+          item[header] = row[index] ? row[index].trim() : "";
+        });
+
+        return item;
+      });
+    }
+
+    function escapeHTML(value) {
+      return String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function normalize(value) {
+      return String(value || "").trim().toLowerCase();
+    }
+
+    function isActive(value) {
+      return normalize(value) !== "no";
+    }
+
+    function splitFocus(value) {
+      return String(value || "")
+        .split(";")
+        .map(item => item.trim())
+        .filter(Boolean);
+    }
+
+    function uniqueSorted(values) {
+      return [...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b));
+    }
+
+    function safeURL(value) {
+      const url = String(value || "").trim();
+
+      if (!url) {
+        return "";
+      }
+
+      if (url.startsWith("http://") || url.startsWith("https://")) {
+        return url;
+      }
+
+      return "";
+    }
+
+    function addOptionsToSelect(selectId, values) {
+      const select = document.getElementById(selectId);
+
+      if (!select) {
+        return;
+      }
+
+      const firstOption = select.querySelector("option");
+      select.innerHTML = "";
+
+      if (firstOption) {
+        select.appendChild(firstOption);
+      }
+
+      values.forEach(value => {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = value;
+        select.appendChild(option);
+      });
+    }
+
+    function populateFilters(programs) {
+      const programTypes = uniqueSorted(programs.map(program => program.program_type));
+
+      const focusAreas = uniqueSorted(
+        programs.flatMap(program => splitFocus(program.focus))
+      );
+
+      addOptionsToSelect("program-type", programTypes);
+      addOptionsToSelect("focus", focusAreas);
+    }
+
+    function createProgramCard(program) {
+      const avatar = escapeHTML(program.avatar || "ID");
+      const programName = escapeHTML(program.program_name || "[Program Name]");
+      const programType = escapeHTML(program.program_type || "");
+      const city = escapeHTML(program.city || "");
+      const state = escapeHTML(program.state || "WA");
+      const center = escapeHTML(program.center || "");
+      const focusAreas = splitFocus(program.focus);
+      const focusText = focusAreas.length ? focusAreas.join(", ") : "";
+      const website = safeURL(program.website);
+
+      const locationText = `${city}${city && state ? ", " : ""}${state}${center ? " • " + center : ""}`;
+
+      const websiteButton = website
+        ? `<a class="btn-tertiary" href="${escapeHTML(website)}" target="_blank" rel="noopener noreferrer">View program</a>`
+        : `<button class="btn-tertiary" type="button">View program</button>`;
+
+      return `
+        <article class="directory-card">
+          <div class="member-avatar">${avatar}</div>
+
+          <div class="card-result">
+            <h2>${programName}</h2>
+
+            ${programType ? `<span class="program-type-pill">${programType}</span>` : ""}
+
+            ${locationText ? `<div class="program-location">${locationText}</div>` : ""}
+
+            ${focusText ? `
+              <div class="program-focus">
+                <strong>Focus:</strong> ${escapeHTML(focusText)}
+              </div>
+            ` : ""}
+          </div>
+
+          <div class="card-actions">
+            ${websiteButton}
+          </div>
+        </article>
+      `;
+    }
+
+    function updateResultsMeta(count) {
+      const resultsMeta = document.getElementById("results-meta");
+
+      if (!resultsMeta) {
+        return;
+      }
+
+      const label = count === 1 ? "program" : "programs";
+      resultsMeta.textContent = `Showing ${count} training ${label}.`;
+    }
+
+    function getFilteredPrograms() {
+      const searchValue = normalize(document.getElementById("search").value);
+      const typeValue = document.getElementById("program-type").value;
+      const focusValue = document.getElementById("focus").value;
+
+      return allPrograms.filter(program => {
+        const focusAreas = splitFocus(program.focus);
+
+        const searchableText = normalize([
+          program.avatar,
+          program.program_name,
+          program.program_type,
+          program.city,
+          program.state,
+          program.center,
+          program.focus
+        ].join(" "));
+
+        const matchesSearch = !searchValue || searchableText.includes(searchValue);
+        const matchesType = !typeValue || program.program_type === typeValue;
+        const matchesFocus = !focusValue || focusAreas.includes(focusValue);
+
+        return matchesSearch && matchesType && matchesFocus;
+      });
+    }
+
+    function renderPrograms(programs) {
+      const container = document.getElementById("training-results");
+
+      if (!container) {
+        return;
+      }
+
+      if (!programs.length) {
+        container.className = "";
+        container.innerHTML = `
+          <div class="empty-message">
+            No training programs match the selected filters.
+          </div>
+        `;
+        updateResultsMeta(0);
+        return;
+      }
+
+      container.className = "directory-list";
+      container.innerHTML = programs.map(createProgramCard).join("");
+      updateResultsMeta(programs.length);
+    }
+
+    function applyFilters() {
+      renderPrograms(getFilteredPrograms());
+    }
+
+    function loadPrograms() {
+      fetch("../Data/training-programs.csv")
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Could not load training-programs.csv");
+          }
+
+          return response.text();
+        })
+        .then(csvText => {
+          const rows = parseCSV(csvText);
+
+          allPrograms = csvRowsToObjects(rows)
+            .filter(program => isActive(program.active))
+            .sort((a, b) => {
+              const aOrder = Number(a.sort_order || 9999);
+              const bOrder = Number(b.sort_order || 9999);
+              return aOrder - bOrder;
+            });
+
+          populateFilters(allPrograms);
+          renderPrograms(allPrograms);
+        })
+        .catch(error => {
+          console.error(error);
+
+          const container = document.getElementById("training-results");
+
+          if (container) {
+            container.className = "";
+            container.innerHTML = `
+              <div class="error-message">
+                Training program information could not be loaded. Check that Data/training-programs.csv exists.
+              </div>
+            `;
+          }
+
+          updateResultsMeta(0);
+        });
+    }
+
+    document.getElementById("search").addEventListener("input", applyFilters);
+    document.getElementById("program-type").addEventListener("change", applyFilters);
+    document.getElementById("focus").addEventListener("change", applyFilters);
+
+    loadPrograms();
+  </script>
+</body>
+</html>

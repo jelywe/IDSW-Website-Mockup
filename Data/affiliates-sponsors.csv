@@ -1,0 +1,4 @@
+sort_order,type,name,description,website,image,active
+1,Affiliate,Infectious Diseases Society of America,"IDSA is a national professional society representing infectious diseases physicians, scientists, and other health care professionals.",https://www.idsociety.org,../Images/Affiliates/idsa-logo.png,yes
+2,Sponsor,[Sponsor Name],Brief description of the sponsor or supporting organization.,https://example.org,,yes
+3,Partner,[Partner Organization],Brief description of the partner organization.,https://example.org,,yes

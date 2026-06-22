@@ -1,0 +1,6 @@
+sort_order,avatar,program_name,program_type,city,state,center,focus,website,active
+1,UW,University of Washington Infectious Diseases Fellowship,ID Fellowship,Seattle,WA,University of Washington,Adult ID;HIV;Transplant ID;Antimicrobial Stewardship,https://aid.uw.edu/education-and-fellowships/ID-fellowship,yes
+2,SCH,Seattle Children’s Pediatric Infectious Diseases Fellowship,Pediatric ID Fellowship,Seattle,WA,Seattle Children’s,Pediatric ID;Immunocompromised Host;Antimicrobial Stewardship,https://example.org,yes
+3,UW,University of Washington Antimicrobial Stewardship Training,Stewardship Training,Seattle,WA,UW Medicine,Antimicrobial Stewardship;Quality Improvement;Clinical Pharmacy,https://example.org,yes
+4,DOH,Washington Department of Health Public Health Training,Public Health Training,Olympia,WA,Washington State Department of Health,Public Health;Outbreak Response;Epidemiology,https://example.org,yes
+5,UW,Clinical Microbiology Rotation,Clinical Microbiology Rotation,Seattle,WA,UW Medicine,Clinical Microbiology;Diagnostics;Laboratory Medicine,https://example.org,yes

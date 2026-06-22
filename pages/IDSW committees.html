@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Committees – IDSW</title>
+
+  <link rel="stylesheet" href="../css/IDSW style.css">
+  <link rel="stylesheet" href="../css/IDSW link section style.css">
+
+  <style>
+    /* Page header */
+    .page-hero {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 30px 30px 22px;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+
+    .page-hero h1 {
+      font-size: 30px;
+      margin-bottom: 10px;
+      color: var(--brand-ink);
+    }
+
+    .page-hero p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text);
+      max-width: 850px;
+    }
+
+    /* Section cards */
+    .section-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 26px 26px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .section-card h2 {
+      font-size: 22px;
+      margin-bottom: 6px;
+      color: var(--brand-ink);
+    }
+
+    .section-card > p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 14px;
+      max-width: 900px;
+    }
+
+    /* Committee grid */
+    .committee-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .committee-card {
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 16px;
+      background: #ffffff;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .committee-image,
+    .committee-image-placeholder {
+      width: 100%;
+      height: 165px;
+      display: block;
+    }
+
+    .committee-image {
+      object-fit: cover;
+      object-position: center;
+      background: var(--tag-bg);
+    }
+
+    .committee-image-placeholder {
+      background: var(--tag-bg);
+      color: var(--brand);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.03em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .committee-card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      flex: 1;
+      padding: 0;
+    }
+
+    .committee-title {
+      padding: 16px 18px;
+    }
+
+    .committee-card.no-image .committee-title {
+      background: #f4f6f4;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .committee-card.has-image .committee-title {
+      padding: 18px 18px 8px;
+    }
+
+    .committee-card h3 {
+      font-size: 18px;
+      margin: 0;
+      color: var(--brand-ink);
+      line-height: 1.35;
+    }
+
+    .committee-description {
+      padding: 14px 18px 10px;
+    }
+
+    .committee-card p {
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .committee-chair {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--muted);
+      margin-top: auto;
+      padding: 4px 18px 18px;
+    }
+
+    .committee-chair strong {
+      color: var(--brand-ink);
+    }
+
+    .loading-message,
+    .empty-message,
+    .error-message {
+      font-size: 15px;
+      color: var(--muted);
+      padding: 18px 0;
+    }
+
+    .error-message {
+      color: #8a2f2f;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .button-row a {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      background: var(--brand);
+      color: #ffffff;
+    }
+
+    .button-row a.secondary {
+      background: var(--tag-bg);
+      color: var(--brand);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--brand);
+      color: #ffffff;
+      padding: 18px 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1000px) {
+      .committee-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 700px) {
+      .committee-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .committee-image,
+      .committee-image-placeholder {
+        height: 190px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <section class="page-hero">
+    <h1>IDSW Committees</h1>
+    <p>
+      IDSW committees help guide the society’s educational programming, advocacy priorities,
+      membership engagement, and special initiatives.
+    </p>
+  </section>
+
+  <section class="section-card">
+    <h2>Standing Committees</h2>
+    <p>
+      Standing committees support ongoing IDSW functions and recurring society priorities.
+    </p>
+
+    <div id="standing-committees" class="committee-grid">
+      <div class="loading-message">Loading standing committees…</div>
+    </div>
+  </section>
+
+  <section class="section-card">
+    <h2>Ad Hoc Committees</h2>
+    <p>
+      Ad hoc committees are formed for focused projects, time-limited initiatives, or emerging needs.
+    </p>
+
+    <div id="ad-hoc-committees" class="committee-grid">
+      <div class="loading-message">Loading ad hoc committees…</div>
+    </div>
+  </section>
+
+  <section class="section-card">
+    <h2>Get Involved</h2>
+    <p>
+      IDSW members interested in serving on a committee are encouraged to contact IDSW leadership
+      or indicate their interests during membership renewal.
+    </p>
+
+    <div class="button-row">
+      <a href="IDSW contact.html">Contact IDSW</a>
+      <a class="secondary" href="IDSW membership.html">Membership Information</a>
+    </div>
+  </section>
+
+  <!-- Shared "More About IDSW" block -->
+  <div id="about-links"></div>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+  /* Shared header */
+  fetch("../includes/IDSW%20header.html")
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById("site-header").innerHTML = html;
+    })
+    .catch(err => console.error(err));
+
+  /* Shared footer */
+  fetch("../includes/IDSW%20footer.html")
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById("site-footer").innerHTML = html;
+    })
+    .catch(err => console.error(err));
+
+  /* Shared About links */
+  const HIDE_ABOUT_LINK = "aboutlink-committees";
+
+  fetch("../includes/IDSW%20about-links.html")
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById("about-links").innerHTML = html;
+
+      const btn = document.getElementById(HIDE_ABOUT_LINK);
+      if (btn) {
+        btn.remove();
+      }
+    })
+    .catch(err => console.error(err));
+
+  /*
+    Committees CSV loader
+
+    Editors update:
+    ../Data/committees.csv
+
+    CSV columns:
+    sort_order,type,name,description,chair,image,active
+
+    type should be either:
+    Standing
+    Ad Hoc
+
+    active:
+    yes = show committee
+    no = hide committee
+  */
+
+  function parseCSV(text) {
+    const rows = [];
+    let currentRow = [];
+    let currentValue = "";
+    let insideQuotes = false;
+
+    for (let i = 0; i < text.length; i++) {
+      const char = text[i];
+      const nextChar = text[i + 1];
+
+      if (char === '"' && insideQuotes && nextChar === '"') {
+        currentValue += '"';
+        i++;
+      } else if (char === '"') {
+        insideQuotes = !insideQuotes;
+      } else if (char === "," && !insideQuotes) {
+        currentRow.push(currentValue.trim());
+        currentValue = "";
+      } else if ((char === "\n" || char === "\r") && !insideQuotes) {
+        if (char === "\r" && nextChar === "\n") {
+          i++;
+        }
+
+        currentRow.push(currentValue.trim());
+
+        if (currentRow.some(value => value !== "")) {
+          rows.push(currentRow);
+        }
+
+        currentRow = [];
+        currentValue = "";
+      } else {
+        currentValue += char;
+      }
+    }
+
+    currentRow.push(currentValue.trim());
+
+    if (currentRow.some(value => value !== "")) {
+      rows.push(currentRow);
+    }
+
+    return rows;
+  }
+
+  function csvRowsToObjects(rows) {
+    if (!rows.length) {
+      return [];
+    }
+
+    const headers = rows[0].map(header => header.trim());
+
+    return rows.slice(1).map(row => {
+      const item = {};
+
+      headers.forEach((header, index) => {
+        item[header] = row[index] ? row[index].trim() : "";
+      });
+
+      return item;
+    });
+  }
+
+  function escapeHTML(value) {
+    return String(value || "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  function isActive(value) {
+    return String(value || "").trim().toLowerCase() !== "no";
+  }
+
+  function normalizeCommitteeType(value) {
+    return String(value || "")
+      .trim()
+      .toLowerCase()
+      .replace("-", " ");
+  }
+
+  function settingIsTrue(value) {
+    return String(value || "").trim().toLowerCase() === "true";
+  }
+
+  function imageErrorFallback(imageElement) {
+    imageElement.outerHTML = `
+      <div class="committee-image-placeholder">
+        Image pending
+      </div>
+    `;
+  }
+
+  function createCommitteeCard(committee, showCommitteeImages) {
+    const name = escapeHTML(committee.name || "[Committee Name]");
+    const description = escapeHTML(committee.description || "[Brief committee description]");
+    const chair = escapeHTML(committee.chair || "TBD");
+    const image = committee.image || "";
+
+    let imageMarkup = "";
+    let imageClass = "no-image";
+
+    if (showCommitteeImages) {
+      imageClass = "has-image";
+
+      imageMarkup = image
+        ? `
+          <img
+            class="committee-image"
+            src="${escapeHTML(image)}"
+            alt="${name}"
+            onerror="imageErrorFallback(this)"
+          >
+        `
+        : `
+          <div class="committee-image-placeholder">
+            Image pending
+          </div>
+        `;
+    }
+
+    return `
+      <article class="committee-card ${imageClass}">
+        ${imageMarkup}
+
+        <div class="committee-card-body">
+          <div class="committee-title">
+            <h3>${name}</h3>
+          </div>
+
+          <p class="committee-description">${description}</p>
+
+          <div class="committee-chair">
+            <strong>Chair:</strong> ${chair}
+          </div>
+        </div>
+      </article>
+    `;
+  }
+
+  function renderCommitteeSection(committees, containerId, emptyMessage, showCommitteeImages) {
+    const container = document.getElementById(containerId);
+
+    if (!container) {
+      return;
+    }
+
+    if (!committees.length) {
+      container.className = "";
+      container.innerHTML = `<div class="empty-message">${escapeHTML(emptyMessage)}</div>`;
+      return;
+    }
+
+    container.className = "committee-grid";
+    container.innerHTML = committees
+      .map(committee => createCommitteeCard(committee, showCommitteeImages))
+      .join("");
+  }
+
+  function loadSiteSettings() {
+    return fetch("../Data/site-settings.csv")
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Could not load site-settings.csv");
+        }
+
+        return response.text();
+      })
+      .then(csvText => {
+        const rows = parseCSV(csvText);
+        const settings = csvRowsToObjects(rows);
+        const settingsObject = {};
+
+        settings.forEach(setting => {
+          settingsObject[setting.setting] = setting.value;
+        });
+
+        return settingsObject;
+      });
+  }
+
+  function loadCommittees(showCommitteeImages) {
+    fetch("../Data/committees.csv")
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Could not load committees.csv");
+        }
+
+        return response.text();
+      })
+      .then(csvText => {
+        const rows = parseCSV(csvText);
+        const committees = csvRowsToObjects(rows)
+          .filter(committee => isActive(committee.active))
+          .sort((a, b) => {
+            const aOrder = Number(a.sort_order || 9999);
+            const bOrder = Number(b.sort_order || 9999);
+
+            return aOrder - bOrder;
+          });
+
+        const standingCommittees = committees.filter(
+          committee => normalizeCommitteeType(committee.type) === "standing"
+        );
+
+        const adHocCommittees = committees.filter(
+          committee => normalizeCommitteeType(committee.type) === "ad hoc"
+        );
+
+        renderCommitteeSection(
+          standingCommittees,
+          "standing-committees",
+          "No standing committees are listed yet.",
+          showCommitteeImages
+        );
+
+        renderCommitteeSection(
+          adHocCommittees,
+          "ad-hoc-committees",
+          "No ad hoc committees are listed yet.",
+          showCommitteeImages
+        );
+      })
+      .catch(error => {
+        console.error(error);
+
+        const standingContainer = document.getElementById("standing-committees");
+        const adHocContainer = document.getElementById("ad-hoc-committees");
+
+        if (standingContainer) {
+          standingContainer.className = "";
+          standingContainer.innerHTML = `
+            <div class="error-message">
+              Committee information could not be loaded. Check that Data/committees.csv exists.
+            </div>
+          `;
+        }
+
+        if (adHocContainer) {
+          adHocContainer.className = "";
+          adHocContainer.innerHTML = "";
+        }
+      });
+  }
+
+  loadSiteSettings()
+    .then(settings => {
+      const showCommitteeImages = settingIsTrue(settings.show_committee_images);
+      loadCommittees(showCommitteeImages);
+    })
+    .catch(error => {
+      console.error(error);
+
+      /*
+        If the settings file is missing, default to no images.
+        This prevents the page from filling with placeholders.
+      */
+      loadCommittees(false);
+    });
+</script>
+
+</body>
+</html>

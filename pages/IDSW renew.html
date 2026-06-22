@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Membership Renewal – IDSW</title>
+
+  <link rel="stylesheet" href="../css/IDSW style.css">
+  <link rel="stylesheet" href="../css/IDSW link section style.css">
+
+  <style>
+    .renewal-card p {
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+
+    .renewal-note {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    .renewal-actions a {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <section class="page-hero">
+    <h1>Membership Renewal</h1>
+    <p>
+      Renew your IDSW membership using our secure online payment link.
+    </p>
+  </section>
+
+  <section class="section-card renewal-card">
+    <h2>Renew Online</h2>
+    <p>
+      To renew your membership, use the secure Square checkout link below. This will open Square’s hosted checkout page,
+      where you can complete your renewal payment safely online.
+    </p>
+
+    <div class="renewal-actions">
+      <a
+        href="https://checkout.square.site/merchant/MXDEH3T3NQC2H/checkout/H6E3XDIN7O5PEMLCWUX3BMSJ"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-green"
+      >
+        Continue to Secure Renewal Checkout
+      </a>
+    </div>
+
+    <p class="renewal-note">
+      You will be taken to a secure external payment page hosted by Square.
+    </p>
+  </section>
+
+  <div id="membership-links"></div>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+  fetch("../includes/IDSW%20header.html")
+    .then(r => r.text())
+    .then(html => { document.getElementById("site-header").innerHTML = html; })
+    .catch(err => console.error(err));
+
+  fetch("../includes/IDSW%20footer.html")
+    .then(r => r.text())
+    .then(html => { document.getElementById("site-footer").innerHTML = html; })
+    .catch(err => console.error(err));
+  
+  const HIDE_ABOUT_LINK = "membershiplink-renew"; 
+  fetch("../includes/IDSW%20membership-links.html")
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById("membership-links").innerHTML = html;
+
+      if (typeof HIDE_ABOUT_LINK !== "undefined" && HIDE_ABOUT_LINK) {
+        const btn = document.getElementById(HIDE_ABOUT_LINK);
+        if (btn) btn.remove();
+      }
+    })
+    .catch(err => console.error(err));
+</script>
+
+</body>
+</html>

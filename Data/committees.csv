@@ -1,0 +1,10 @@
+sort_order,type,name,description,chair,image,active
+1,Standing,Education & Events,"Plans educational sessions, webinars, and member learning opportunities.",[Chair Name],,yes
+2,Standing,Stewardship,Supports antimicrobial stewardship collaboration and sharing best practices statewide.,[Chair Name],,yes
+3,Standing,Membership & Engagement,"Strengthens member experience, recruitment, mentorship, and communications.",[Chair Name],,yes
+4,Standing,Advocacy & Policy,Tracks priority issues and helps coordinate policy positions and member action alerts.,[Chair Name],,yes
+5,Standing,Equity & Access,Promotes equitable access to ID expertise and supports inclusive programs and outreach.,[Chair Name],,yes
+6,Standing,Communications,"Maintains web updates, newsletters, storytelling, and information sharing.",[Chair Name],,yes
+7,Ad Hoc,[Project / Initiative Name],"Short description of the scope, timeline, and deliverable for this project.",[Chair Name],,yes
+8,Ad Hoc,[Project / Initiative Name],"Short description of the scope, timeline, and deliverable for this project.",[Chair Name],,yes
+9,Ad Hoc,[Project / Initiative Name],"Short description of the scope, timeline, and deliverable for this project.",[Chair Name],,yes

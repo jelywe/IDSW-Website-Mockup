@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>IDSW – Member Directory</title>
+
+  <link rel="stylesheet" href="../css/IDSW style.css">
+
+  <style>
+    .results-meta {
+      font-size: 13px;
+      color: #666;
+      margin: 10px 2px 12px;
+    }
+
+    .loading-message,
+    .empty-message,
+    .error-message {
+      font-size: 15px;
+      color: var(--muted);
+      padding: 18px 0;
+    }
+
+    .error-message {
+      color: #8a2f2f;
+    }
+
+    /* Contact request modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 9999;
+    }
+
+    .modal-overlay.is-open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.22);
+      max-width: 640px;
+      width: 100%;
+      padding: 28px;
+      position: relative;
+    }
+
+    .modal-card h2 {
+      font-size: 24px;
+      color: var(--brand-ink);
+      margin-bottom: 10px;
+    }
+
+    .modal-description {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 18px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      border: none;
+      background: transparent;
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
+      color: var(--muted);
+    }
+
+    .modal-card .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .modal-card label {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--brand-ink);
+    }
+
+    .modal-card input,
+    .modal-card textarea {
+      width: 100%;
+      border: 1px solid rgba(0,0,0,0.16);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 15px;
+      font-family: inherit;
+      color: var(--text);
+      background: #ffffff;
+    }
+
+    .modal-card input[readonly] {
+      background: #f4f6f4;
+      color: var(--muted);
+    }
+
+    .modal-card textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .modal-card small {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .notice-box {
+      background: #f4f6f4;
+      border-left: 4px solid var(--brand);
+      border-radius: 12px;
+      padding: 14px 16px;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.55;
+      margin-top: 14px;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: var(--brand);
+      color: #ffffff;
+    }
+
+    .btn-secondary {
+      background: var(--tag-bg);
+      color: var(--brand);
+    }
+
+    @media (max-width: 700px) {
+      .modal-card {
+        padding: 22px;
+      }
+
+      .modal-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="site-header"></div>
+
+  <main>
+    <div class="directory-header">
+      <h1>Member Directory</h1>
+      <p>Search IDSW members across Washington State for shared patients and subject-matter expertise.</p>
+    </div>
+
+    <!-- Search + filters -->
+    <section class="search-filter-bar">
+      <div>
+        <label for="search">Search by name, institution, or specialty</label>
+        <input id="search" type="text" placeholder="e.g., Fessler, UW, HIV, STIs">
+      </div>
+
+      <div>
+        <label for="region">Region</label>
+        <select id="region">
+          <option value="">All regions</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="specialty">Specialization</label>
+        <select id="specialty">
+          <option value="">All specializations</option>
+        </select>
+      </div>
+    </section>
+
+    <div id="results-meta" class="results-meta">
+      Loading example members…
+    </div>
+
+    <!-- Directory cards – one per row -->
+    <section id="member-results" class="directory-list">
+      <div class="loading-message">Loading member directory…</div>
+    </section>
+  </main>
+
+  <!-- Contact request modal -->
+  <div id="contact-request-modal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="contact-request-title">
+      <button type="button" class="modal-close" id="close-contact-modal" aria-label="Close contact request form">
+        ×
+      </button>
+
+      <h2 id="contact-request-title">Request Contact</h2>
+
+      <p class="modal-description">
+        This request sends an email from IDSW to the requester. The member you are requesting to contact
+        will be BCC’d on the email so they can decide whether to respond directly.  The member you are requesting
+        to contact will be able to see your name, and your own contact information. 
+      </p>
+
+      <form id="contact-request-form">
+        <div class="field">
+          <label for="requestee-name">Requested Member</label>
+          <input id="requestee-name" name="requestee_name" type="text" readonly>
+        </div>
+
+        <div class="field">
+          <label for="requester-email">Your Email</label>
+          <input id="requester-email" name="requester_email" type="email" value="requester@example.org" readonly>
+          <small>This will be auto-filled from the signed-in requester account in the final version.</small>
+        </div>
+
+        <div class="field">
+          <label for="request-message">Requested Message</label>
+          <textarea
+            id="request-message"
+            name="request_message"
+            placeholder="Write the message you would like IDSW to send with your contact request."
+          ></textarea>
+        </div>
+
+        <div class="notice-box">
+          Mockup behavior only: this form does not yet send email. In the final version, IDSW would send the request
+          to the requester with the requested member BCC’d.
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" id="cancel-contact-request">Cancel</button>
+          <button type="submit" class="btn-primary">Submit Request</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="site-footer"></div>
+
+  <script>
+    let allMembers = [];
+
+    /*
+      Mockup requester email.
+      In the final site, this should come from the logged-in user's account.
+    */
+    const MOCK_REQUESTER_EMAIL = "requester@example.org";
+
+    fetch("../includes/IDSW%20header.html")
+      .then(r => {
+        if (!r.ok) throw new Error("Failed to load header.html");
+        return r.text();
+      })
+      .then(html => {
+        document.getElementById("site-header").innerHTML = html;
+      })
+      .catch(err => console.error(err));
+
+    fetch("../includes/IDSW%20footer.html")
+      .then(r => {
+        if (!r.ok) throw new Error("Failed to load footer.html");
+        return r.text();
+      })
+      .then(html => {
+        document.getElementById("site-footer").innerHTML = html;
+      })
+      .catch(err => console.error(err));
+
+    /*
+      Member Directory CSV loader
+
+      Editors update:
+      ../Data/members.csv
+
+      CSV columns:
+      sort_order,avatar,name,titles,affiliations,region,specialty,active
+
+      titles:
+      Separate multiple titles with semicolons.
+      Example:
+      Infectious Diseases Fellow;MPH Student
+
+      affiliations:
+      Separate multiple affiliations with semicolons.
+      Example:
+      University of Washington;University of Washington School of Public Health
+
+      active:
+      yes = show member
+      no = hide member
+    */
+
+    function parseCSV(text) {
+      const rows = [];
+      let currentRow = [];
+      let currentValue = "";
+      let insideQuotes = false;
+
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        const nextChar = text[i + 1];
+
+        if (char === '"' && insideQuotes && nextChar === '"') {
+          currentValue += '"';
+          i++;
+        } else if (char === '"') {
+          insideQuotes = !insideQuotes;
+        } else if (char === "," && !insideQuotes) {
+          currentRow.push(currentValue.trim());
+          currentValue = "";
+        } else if ((char === "\n" || char === "\r") && !insideQuotes) {
+          if (char === "\r" && nextChar === "\n") {
+            i++;
+          }
+
+          currentRow.push(currentValue.trim());
+
+          if (currentRow.some(value => value !== "")) {
+            rows.push(currentRow);
+          }
+
+          currentRow = [];
+          currentValue = "";
+        } else {
+          currentValue += char;
+        }
+      }
+
+      currentRow.push(currentValue.trim());
+
+      if (currentRow.some(value => value !== "")) {
+        rows.push(currentRow);
+      }
+
+      return rows;
+    }
+
+    function csvRowsToObjects(rows) {
+      if (!rows.length) {
+        return [];
+      }
+
+      const headers = rows[0].map(header => header.trim());
+
+      return rows.slice(1).map(row => {
+        const item = {};
+
+        headers.forEach((header, index) => {
+          item[header] = row[index] ? row[index].trim() : "";
+        });
+
+        return item;
+      });
+    }
+
+    function escapeHTML(value) {
+      return String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function normalize(value) {
+      return String(value || "").trim().toLowerCase();
+    }
+
+    function isActive(value) {
+      return normalize(value) !== "no";
+    }
+
+    function splitList(value) {
+      return String(value || "")
+        .split(";")
+        .map(item => item.trim())
+        .filter(Boolean);
+    }
+
+    function uniqueSorted(values) {
+      return [...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b));
+    }
+
+    function addOptionsToSelect(selectId, values) {
+      const select = document.getElementById(selectId);
+
+      if (!select) {
+        return;
+      }
+
+      const firstOption = select.querySelector("option");
+      select.innerHTML = "";
+
+      if (firstOption) {
+        select.appendChild(firstOption);
+      }
+
+      values.forEach(value => {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = value;
+        select.appendChild(option);
+      });
+    }
+
+    function populateFilters(members) {
+      const regions = uniqueSorted(members.map(member => member.region));
+      const specialties = uniqueSorted(members.map(member => member.specialty));
+
+      addOptionsToSelect("region", regions);
+      addOptionsToSelect("specialty", specialties);
+    }
+
+    function createMemberCard(member) {
+  const avatar = escapeHTML(member.avatar || "ID");
+  const name = escapeHTML(member.name || "[Member Name]");
+  const title1 = escapeHTML(member.title_1 || "");
+  const affiliation1 = escapeHTML(member.affiliation_1 || "");
+  const title2 = escapeHTML(member.title_2 || "");
+  const affiliation2 = escapeHTML(member.affiliation_2 || "");
+  const specialty = escapeHTML(member.specialty || "");
+
+  function titleAffiliationLine(title, affiliation) {
+    if (title && affiliation) {
+      return `<div class="title-line">${title} • ${affiliation}</div>`;
+    }
+
+    if (title) {
+      return `<div class="title-line">${title}</div>`;
+    }
+
+    if (affiliation) {
+      return `<div class="title-line">${affiliation}</div>`;
+    }
+
+    return "";
+  }
+
+  const titleAffiliationMarkup = [
+    titleAffiliationLine(title1, affiliation1),
+    titleAffiliationLine(title2, affiliation2)
+  ].join("");
+
+  return `
+    <article class="directory-card">
+      <div class="member-avatar">${avatar}</div>
+
+      <div class="card-result">
+        <h2>${name}</h2>
+        ${titleAffiliationMarkup}
+        ${specialty ? `<div class="specialty">${specialty}</div>` : ""}
+      </div>
+
+      <div class="card-actions">
+        <button
+          type="button"
+          class="btn-tertiary request-contact-btn"
+          data-requestee-name="${name}"
+        >
+          Request contact
+        </button>
+      </div>
+    </article>
+  `;
+}
+
+    function updateResultsMeta(count) {
+      const resultsMeta = document.getElementById("results-meta");
+
+      if (!resultsMeta) {
+        return;
+      }
+
+      const label = count === 1 ? "member" : "members";
+      resultsMeta.textContent = `Showing ${count} example ${label}. Actual contact details and visibility will respect each member’s privacy settings.`;
+    }
+
+    function getFilteredMembers() {
+      const searchValue = normalize(document.getElementById("search").value);
+      const regionValue = document.getElementById("region").value;
+      const specialtyValue = document.getElementById("specialty").value;
+
+      return allMembers.filter(member => {
+        const searchableText = normalize([
+          member.avatar,
+          member.name,
+          member.title_1,
+          member.affiliation_1,
+          member.title_2,
+          member.affiliation_2,
+          member.region,
+          member.specialty
+        ].join(" "));
+
+        const matchesSearch = !searchValue || searchableText.includes(searchValue);
+        const matchesRegion = !regionValue || member.region === regionValue;
+        const matchesSpecialty = !specialtyValue || member.specialty === specialtyValue;
+
+        return matchesSearch && matchesRegion && matchesSpecialty;
+      });
+    }
+
+    function renderMembers(members) {
+      const container = document.getElementById("member-results");
+
+      if (!container) {
+        return;
+      }
+
+      if (!members.length) {
+        container.className = "";
+        container.innerHTML = `
+          <div class="empty-message">
+            No members match the selected filters.
+          </div>
+        `;
+        updateResultsMeta(0);
+        return;
+      }
+
+      container.className = "directory-list";
+      container.innerHTML = members.map(createMemberCard).join("");
+      updateResultsMeta(members.length);
+      attachContactRequestButtons();
+    }
+
+    function applyFilters() {
+      renderMembers(getFilteredMembers());
+    }
+
+    function loadMembers() {
+      fetch("../Data/members.csv")
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Could not load members.csv");
+          }
+
+          return response.text();
+        })
+        .then(csvText => {
+          const rows = parseCSV(csvText);
+
+          allMembers = csvRowsToObjects(rows)
+            .filter(member => isActive(member.active))
+            .sort((a, b) => {
+              const aOrder = Number(a.sort_order || 9999);
+              const bOrder = Number(b.sort_order || 9999);
+              return aOrder - bOrder;
+            });
+
+          populateFilters(allMembers);
+          renderMembers(allMembers);
+        })
+        .catch(error => {
+          console.error(error);
+
+          const container = document.getElementById("member-results");
+
+          if (container) {
+            container.className = "";
+            container.innerHTML = `
+              <div class="error-message">
+                Member directory information could not be loaded. Check that Data/members.csv exists.
+              </div>
+            `;
+          }
+
+          updateResultsMeta(0);
+        });
+    }
+
+    document.getElementById("search").addEventListener("input", applyFilters);
+    document.getElementById("region").addEventListener("change", applyFilters);
+    document.getElementById("specialty").addEventListener("change", applyFilters);
+
+    /* Contact request modal logic */
+    const modal = document.getElementById("contact-request-modal");
+    const requesteeNameInput = document.getElementById("requestee-name");
+    const requesterEmailInput = document.getElementById("requester-email");
+    const requestMessageInput = document.getElementById("request-message");
+
+    const closeModalButton = document.getElementById("close-contact-modal");
+    const cancelButton = document.getElementById("cancel-contact-request");
+    const contactRequestForm = document.getElementById("contact-request-form");
+
+    function openContactRequestModal(requesteeName) {
+      requesteeNameInput.value = requesteeName || "";
+      requesterEmailInput.value = MOCK_REQUESTER_EMAIL;
+      requestMessageInput.value = "";
+
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      requestMessageInput.focus();
+    }
+
+    function closeContactRequestModal() {
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+    }
+
+    function attachContactRequestButtons() {
+      document.querySelectorAll(".request-contact-btn").forEach(button => {
+        button.addEventListener("click", () => {
+          const requesteeName = button.getAttribute("data-requestee-name");
+          openContactRequestModal(requesteeName);
+        });
+      });
+    }
+
+    closeModalButton.addEventListener("click", closeContactRequestModal);
+    cancelButton.addEventListener("click", closeContactRequestModal);
+
+    modal.addEventListener("click", event => {
+      if (event.target === modal) {
+        closeContactRequestModal();
+      }
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && modal.classList.contains("is-open")) {
+        closeContactRequestModal();
+      }
+    });
+
+    contactRequestForm.addEventListener("submit", event => {
+      event.preventDefault();
+
+      /*
+        Mockup only.
+
+        Final intended behavior:
+        - Send email FROM IDSW / system account
+        - Send TO requesterEmailInput.value
+        - BCC the requested member
+        - Include requestMessageInput.value in the body
+      */
+
+      alert("Mockup only: contact request submitted.");
+      closeContactRequestModal();
+    });
+
+    loadMembers();
+  </script>
+</body>
+</html>
